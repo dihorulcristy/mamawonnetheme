@@ -1,0 +1,37 @@
+{%- comment -%} Customer Register {%- endcomment -%}
+<section class="page-content">
+  <div class="container">
+    <div class="page-content__inner" style="max-width:440px">
+      <h1 style="text-align:center">{{ 'customer.register.title' | t }}</h1>
+      {% form 'create_customer' %}
+        {{ form.errors | default_errors }}
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <div style="flex:1">
+            <label for="first_name" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.register.first_name' | t }}</label>
+            <input type="text" id="first_name" name="customer[first_name]" class="search-form__input" style="width:100%" required>
+          </div>
+          <div style="flex:1">
+            <label for="last_name" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.register.last_name' | t }}</label>
+            <input type="text" id="last_name" name="customer[last_name]" class="search-form__input" style="width:100%" required>
+          </div>
+        </div>
+        <div style="margin-bottom:16px">
+          <label for="email" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.register.email' | t }}</label>
+          <input type="email" id="email" name="customer[email]" class="search-form__input" style="width:100%" autocomplete="email" required>
+        </div>
+        <div style="margin-bottom:16px">
+          <label for="password" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.register.password' | t }}</label>
+          <input type="password" id="password" name="customer[password]" class="search-form__input" style="width:100%" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">{{ 'customer.register.submit' | t }}</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Registrieren",
+  "settings": []
+}
+{% endschema %}

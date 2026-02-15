@@ -1,0 +1,117 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MamaWonne",
+    "theme_version": "1.0.0",
+    "theme_author": "MamaWonne",
+    "theme_documentation_url": "https://mamawonne.de",
+    "theme_support_url": "https://mamawonne.de/kontakt"
+  },
+  {
+    "name": "Farben",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primärfarbe (Hintergrund)",
+        "default": "#F5E6D8"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Sekundärfarbe (Akzente & Text)",
+        "default": "#8B7355"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Akzentfarbe (CTAs)",
+        "default": "#D4A574"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Textfarbe",
+        "default": "#3D3D3D"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "Weiß",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_alt",
+        "label": "Alternativer Hintergrund",
+        "default": "#E8D5C4"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "default": "https://instagram.com/mamawonne"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL",
+        "default": "https://facebook.com/mamawonne"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Warenkorb",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Warenkorb-Typ",
+        "options": [
+          { "value": "drawer", "label": "Seitliche Schublade" },
+          { "value": "page", "label": "Warenkorbseite" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_free_shipping_bar",
+        "label": "Kostenloser Versand Fortschrittsbalken anzeigen",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold",
+        "label": "Schwelle für kostenlosen Versand (€)",
+        "default": "50"
+      }
+    ]
+  }
+]

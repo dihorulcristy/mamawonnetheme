@@ -1,0 +1,31 @@
+{%- comment -%} Customer Login {%- endcomment -%}
+<section class="page-content">
+  <div class="container">
+    <div class="page-content__inner" style="max-width:440px">
+      <h1 style="text-align:center">{{ 'customer.login.title' | t }}</h1>
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+        <div style="margin-bottom:16px">
+          <label for="email" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.login.email' | t }}</label>
+          <input type="email" id="email" name="customer[email]" class="search-form__input" style="width:100%" autocomplete="email" required>
+        </div>
+        <div style="margin-bottom:16px">
+          <label for="password" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px">{{ 'customer.login.password' | t }}</label>
+          <input type="password" id="password" name="customer[password]" class="search-form__input" style="width:100%" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full" style="margin-bottom:16px">{{ 'customer.login.sign_in' | t }}</button>
+        <p style="text-align:center;font-size:0.88rem">
+          <a href="/account/register" style="color:var(--color-accent)">{{ 'customer.login.create_account' | t }}</a> ·
+          <a href="#recover">{{ 'customer.login.forgot_password' | t }}</a>
+        </p>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Anmelden",
+  "settings": []
+}
+{% endschema %}

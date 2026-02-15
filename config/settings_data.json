@@ -1,0 +1,17 @@
+{
+    "current": {
+        "color_primary": "#F5E6D8",
+        "color_secondary": "#8B7355",
+        "color_accent": "#D4A574",
+        "color_text": "#3D3D3D",
+        "color_white": "#FFFFFF",
+        "color_bg_alt": "#E8D5C4",
+        "social_instagram": "https://instagram.com/mamawonne",
+        "social_facebook": "https://facebook.com/mamawonne",
+        "social_pinterest": "",
+        "social_tiktok": "",
+        "cart_type": "drawer",
+        "cart_show_free_shipping_bar": true,
+        "cart_free_shipping_threshold": "50"
+    }
+}

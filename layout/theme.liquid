@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>
+    {%- if page_title -%}
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; Seite {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    {%- else -%}
+      {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  {%- comment -%} Google Fonts {%- endcomment -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  {%- comment -%} Theme CSS {%- endcomment -%}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} Shopify required header content {%- endcomment -%}
+  {{ content_for_header }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+
+  {%- comment -%} CSS Custom Properties from Theme Settings {%- endcomment -%}
+  <style>
+    :root {
+      --color-primary: {{ settings.color_primary | default: '#F5E6D8' }};
+      --color-secondary: {{ settings.color_secondary | default: '#8B7355' }};
+      --color-accent: {{ settings.color_accent | default: '#D4A574' }};
+      --color-text: {{ settings.color_text | default: '#3D3D3D' }};
+      --color-white: {{ settings.color_white | default: '#FFFFFF' }};
+      --color-bg-alt: {{ settings.color_bg_alt | default: '#E8D5C4' }};
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Nunito Sans', sans-serif;
+      --font-accent: 'Caveat', cursive;
+      --border-radius: 10px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --header-height: 80px;
+    }
+  </style>
+</head>
+
+<body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+  <a href="#main-content" class="skip-link visually-hidden">Zum Inhalt springen</a>
+
+  {%- comment -%} Cart Drawer {%- endcomment -%}
+  {% section 'cart-drawer' %}
+
+  {%- comment -%} Announcement Bar {%- endcomment -%}
+  {% section 'announcement-bar' %}
+
+  {%- comment -%} Header {%- endcomment -%}
+  {% section 'header' %}
+
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} Footer {%- endcomment -%}
+  {% section 'footer' %}
+
+  {%- comment -%} Mobile Bottom Navigation {%- endcomment -%}
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="/" class="mobile-bottom-nav__item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="/collections/all" class="mobile-bottom-nav__item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Shop</span>
+    </a>
+    <a href="/search" class="mobile-bottom-nav__item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <span>Suche</span>
+    </a>
+    <a href="/account" class="mobile-bottom-nav__item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-7 7-7s7 3 7 7"/></svg>
+      <span>Konto</span>
+    </a>
+    <button class="mobile-bottom-nav__item" data-cart-toggle aria-label="Warenkorb öffnen">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>{{ cart.item_count }}</span>
+    </button>
+  </nav>
+
+  {%- comment -%} Theme JS {%- endcomment -%}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

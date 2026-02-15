@@ -1,0 +1,54 @@
+{%- comment -%} Trust Bar Section {%- endcomment -%}
+
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-bar__grid">
+      {%- for block in section.blocks -%}
+        <div class="trust-bar__item" {{ block.shopify_attributes }}>
+          <span class="trust-bar__icon">{{ block.settings.icon }}</span>
+          <span class="trust-bar__text">{{ block.settings.text }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vertrauensleiste",
+  "class": "trust-bar-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Vertrauenselement",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "🚚"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Kostenloser Versand ab 50€"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vertrauensleiste",
+      "blocks": [
+        { "type": "trust_item", "settings": { "icon": "🚚", "text": "Kostenloser Versand ab 50€" } },
+        { "type": "trust_item", "settings": { "icon": "↩️", "text": "30 Tage Rückgaberecht" } },
+        { "type": "trust_item", "settings": { "icon": "🏆", "text": "Über 15.000 zufriedene Eltern" } },
+        { "type": "trust_item", "settings": { "icon": "💬", "text": "Persönliche Beratung" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+{%- comment -%} Instagram Feed Section {%- endcomment -%}
+
+<section class="instagram-feed section-padding">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="instagram-grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ section.settings.instagram_url | default: '#' }}" target="_blank" rel="noopener" class="instagram-grid__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 400 }}" alt="Instagram" width="400" height="400" loading="lazy">
+          {%- else -%}
+            {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag }}
+          {%- endif -%}
+          <div class="instagram-grid__overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_follow_btn -%}
+      <div style="text-align:center;margin-top:32px">
+        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" class="btn btn--secondary">
+          {{ section.settings.follow_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "class": "instagram-feed-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Die #MamaWonne Familie"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram-URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_follow_btn",
+      "label": "Folge-Button anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "follow_text",
+      "label": "Folge-Button Text",
+      "default": "Folge uns auf Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Bild",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bild"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

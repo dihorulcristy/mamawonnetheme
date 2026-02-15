@@ -1,0 +1,85 @@
+{%- comment -%} How It Works Section {%- endcomment -%}
+
+<section class="how-it-works section-padding">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="how-steps">
+      {%- for block in section.blocks -%}
+        <div class="how-step" {{ block.shopify_attributes }}>
+          <div class="how-step__image">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                alt="{{ block.settings.title | escape }}"
+                width="800"
+                height="500"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          <div class="how-step__content">
+            <span class="how-step__number">{{ forloop.index }}</span>
+            <h3 class="how-step__title">{{ block.settings.title }}</h3>
+            <p class="how-step__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "So hilft MamaWonne",
+  "class": "how-it-works-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "So hilft MamaWonne Ihrem Baby"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bild"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "Schritt"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Beschreibung",
+          "default": "Beschreibung des Schritts"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "So hilft MamaWonne",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Reflux kann den Schlaf Ihres Babys stören", "text": "Viele Babys leiden unter Reflux, was zu unruhigen Nächten und Unbehagen führt." } },
+        { "type": "step", "settings": { "title": "Unsere 15° Neigung unterstützt die natürliche Verdauung", "text": "Die ergonomisch entwickelte Neigung hilft, Reflux auf natürliche Weise zu reduzieren." } },
+        { "type": "step", "settings": { "title": "Ruhigere Nächte für Baby und Eltern", "text": "Besserer Schlaf für die ganze Familie – wissenschaftlich bestätigt." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

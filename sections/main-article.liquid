@@ -1,0 +1,23 @@
+{%- comment -%} Main Article Section {%- endcomment -%}
+<section class="page-content">
+  <div class="container">
+    <div class="page-content__inner">
+      <p class="product-breadcrumbs" style="margin-bottom:20px">
+        <a href="/">Startseite</a> / <a href="{{ blog.url }}">{{ blog.title }}</a> / <span>{{ article.title }}</span>
+      </p>
+      {%- if article.image -%}
+        <img src="{{ article.image | image_url: width: 1000 }}" alt="{{ article.title | escape }}" width="1000" style="border-radius:var(--border-radius);margin-bottom:24px" loading="eager">
+      {%- endif -%}
+      <p style="font-size:0.82rem;color:#999;margin-bottom:8px">{{ article.published_at | date: '%d. %B %Y' }} · {{ article.author }}</p>
+      <h1>{{ article.title }}</h1>
+      <div class="rte">{{ article.content }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blogbeitrag",
+  "settings": []
+}
+{% endschema %}

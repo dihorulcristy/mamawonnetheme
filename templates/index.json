@@ -1,0 +1,56 @@
+{
+    "sections": {
+        "hero": {
+            "type": "hero",
+            "settings": {}
+        },
+        "trust-bar": {
+            "type": "trust-bar",
+            "settings": {}
+        },
+        "featured-products": {
+            "type": "featured-products",
+            "settings": {}
+        },
+        "value-proposition": {
+            "type": "value-proposition",
+            "settings": {}
+        },
+        "how-it-works": {
+            "type": "how-it-works",
+            "settings": {}
+        },
+        "testimonials": {
+            "type": "testimonials",
+            "settings": {}
+        },
+        "press-logos": {
+            "type": "press-logos",
+            "settings": {}
+        },
+        "instagram-feed": {
+            "type": "instagram-feed",
+            "settings": {}
+        },
+        "newsletter": {
+            "type": "newsletter",
+            "settings": {}
+        },
+        "faq": {
+            "type": "faq",
+            "settings": {}
+        }
+    },
+    "order": [
+        "hero",
+        "trust-bar",
+        "featured-products",
+        "value-proposition",
+        "how-it-works",
+        "testimonials",
+        "press-logos",
+        "instagram-feed",
+        "newsletter",
+        "faq"
+    ]
+}

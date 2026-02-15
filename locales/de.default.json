@@ -1,0 +1,196 @@
+{
+    "general": {
+        "skip_to_content": "Zum Inhalt springen",
+        "search": "Suchen",
+        "close": "Schließen",
+        "menu": "Menü",
+        "loading": "Wird geladen..."
+    },
+    "accessibility": {
+        "close": "Schließen",
+        "skip_to_content": "Zum Inhalt springen",
+        "previous": "Zurück",
+        "next": "Weiter"
+    },
+    "header": {
+        "cart": "Warenkorb",
+        "account": "Konto",
+        "search": "Suchen",
+        "menu": "Menü"
+    },
+    "products": {
+        "product": {
+            "add_to_cart": "In den Warenkorb",
+            "added_to_cart": "Hinzugefügt!",
+            "sold_out": "Ausverkauft",
+            "unavailable": "Nicht verfügbar",
+            "price": {
+                "from": "Ab",
+                "sale": "Angebot",
+                "regular_price": "Normaler Preis",
+                "sale_price": "Sonderpreis",
+                "unit_price": "Stückpreis"
+            },
+            "quantity": {
+                "label": "Menge",
+                "increase": "Menge erhöhen",
+                "decrease": "Menge verringern"
+            },
+            "description": "Beschreibung",
+            "materials": "Materialien",
+            "care": "Pflegehinweise",
+            "shipping": "Versand",
+            "reviews": "Bewertungen",
+            "share": "Teilen",
+            "vendor": "Hersteller",
+            "type": "Typ",
+            "sku": "Artikelnummer"
+        },
+        "card": {
+            "bestseller": "Bestseller",
+            "new": "Neu",
+            "sale": "Angebot",
+            "limited": "Limitiert",
+            "quick_add": "Schnell hinzufügen"
+        }
+    },
+    "collections": {
+        "title": "Kollektionen",
+        "sort_by": "Sortieren nach",
+        "sort_options": {
+            "manual": "Empfohlen",
+            "best_selling": "Meistverkauft",
+            "title_ascending": "A-Z",
+            "title_descending": "Z-A",
+            "price_ascending": "Preis aufsteigend",
+            "price_descending": "Preis absteigend",
+            "created_ascending": "Älteste",
+            "created_descending": "Neueste"
+        },
+        "filter": "Filter",
+        "clear_filters": "Filter zurücksetzen",
+        "no_products": "Keine Produkte gefunden",
+        "products_count": "{{ count }} Produkte"
+    },
+    "cart": {
+        "title": "Warenkorb",
+        "empty": "Ihr Warenkorb ist leer",
+        "continue_shopping": "Weiter einkaufen",
+        "subtotal": "Zwischensumme",
+        "shipping_note": "Versandkosten werden an der Kasse berechnet",
+        "checkout": "Zur Kasse",
+        "remove": "Entfernen",
+        "update": "Aktualisieren",
+        "free_shipping_message": "Noch {{ amount }} bis zum kostenlosen Versand!",
+        "free_shipping_achieved": "🎉 Kostenloser Versand!",
+        "taxes_note": "Inkl. MwSt."
+    },
+    "customer": {
+        "account": {
+            "title": "Mein Konto",
+            "orders": "Bestellungen",
+            "addresses": "Adressen",
+            "details": "Kontodaten"
+        },
+        "login": {
+            "title": "Anmelden",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "forgot_password": "Passwort vergessen?",
+            "sign_in": "Anmelden",
+            "create_account": "Konto erstellen"
+        },
+        "register": {
+            "title": "Konto erstellen",
+            "first_name": "Vorname",
+            "last_name": "Nachname",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "submit": "Konto erstellen"
+        },
+        "orders": {
+            "title": "Bestellübersicht",
+            "order_number": "Bestellung",
+            "date": "Datum",
+            "status": "Status",
+            "total": "Gesamt"
+        }
+    },
+    "blog": {
+        "title": "Blog",
+        "read_more": "Weiterlesen",
+        "posted_on": "Veröffentlicht am",
+        "by_author": "von {{ author }}",
+        "comments": {
+            "title": "Kommentare",
+            "no_comments": "Noch keine Kommentare",
+            "submit": "Kommentar senden"
+        }
+    },
+    "search": {
+        "title": "Suche",
+        "placeholder": "Produkte suchen...",
+        "no_results": "Keine Ergebnisse für \"{{ terms }}\"",
+        "results_count": "{{ count }} Ergebnisse für \"{{ terms }}\""
+    },
+    "newsletter": {
+        "email_placeholder": "Ihre E-Mail-Adresse",
+        "subscribe": "Anmelden",
+        "success": "Vielen Dank für Ihre Anmeldung!"
+    },
+    "sections": {
+        "hero": {
+            "headline": "Ruhiger Schlaf für Ihr Baby – Von Anfang an",
+            "subheadline": "Wissenschaftlich entwickelte Anti-Reflux Produkte für sicheren und erholsamen Babyschlaf",
+            "cta_primary": "Jetzt entdecken",
+            "cta_secondary": "Mehr erfahren"
+        },
+        "trust_bar": {
+            "free_shipping": "Kostenloser Versand ab 50€",
+            "returns": "30 Tage Rückgaberecht",
+            "customers": "Über 15.000 zufriedene Eltern",
+            "support": "Persönliche Beratung"
+        },
+        "featured_products": {
+            "title": "Unsere Bestseller",
+            "view_all": "Alle Produkte ansehen"
+        },
+        "usp": {
+            "title": "Warum MamaWonne?",
+            "natural_title": "Natürliche Materialien",
+            "natural_text": "100% Bio-Baumwolle, OEKO-TEX zertifiziert",
+            "science_title": "Wissenschaftlich entwickelt",
+            "science_text": "Von Kinderärzten empfohlen",
+            "love_title": "Mit Liebe gemacht",
+            "love_text": "Handgefertigt in Europa"
+        },
+        "how_it_works": {
+            "title": "So hilft MamaWonne Ihrem Baby"
+        },
+        "testimonials": {
+            "title": "Das sagen unsere Kunden",
+            "verified": "Verifizierter Kauf",
+            "read_all": "Alle Bewertungen lesen"
+        },
+        "press": {
+            "title": "Bekannt aus"
+        },
+        "instagram": {
+            "title": "Die #MamaWonne Familie",
+            "follow": "Folge uns auf Instagram"
+        },
+        "newsletter_section": {
+            "title": "10% Rabatt auf Ihre erste Bestellung",
+            "subtitle": "Plus: Exklusive Tipps für besseren Babyschlaf"
+        },
+        "faq": {
+            "title": "Häufige Fragen",
+            "more": "Mehr FAQ"
+        }
+    },
+    "404": {
+        "title": "Seite nicht gefunden",
+        "text": "Die angeforderte Seite konnte nicht gefunden werden.",
+        "button": "Zurück zur Startseite"
+    }
+}

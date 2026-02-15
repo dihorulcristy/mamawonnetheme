@@ -1,0 +1,88 @@
+{%- comment -%} Featured Products Section {%- endcomment -%}
+
+<section class="featured-products section-padding">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="product-grid">
+      {%- if section.settings.collection != blank -%}
+        {%- for product in collections[section.settings.collection].products limit: section.settings.products_count -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="product-card">
+            <div class="product-card__image-wrap">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'product-card__image' }}
+            </div>
+            <div class="product-card__info">
+              <h3 class="product-card__title"><a href="#">Beispielprodukt {{ i }}</a></h3>
+              <div class="product-card__price"><span>€49,90</span></div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div style="text-align:center;margin-top:40px">
+        <a href="{{ section.settings.collection_link | default: '/collections/all' }}" class="btn btn--secondary">
+          {{ section.settings.view_all_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestseller Produkte",
+  "class": "featured-products-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Unsere Bestseller"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Kollektion"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Anzahl der Produkte",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "\"Alle ansehen\" anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "\"Alle ansehen\" Text",
+      "default": "Alle Produkte ansehen"
+    },
+    {
+      "type": "url",
+      "id": "collection_link",
+      "label": "Link zu allen Produkten"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestseller Produkte"
+    }
+  ]
+}
+{% endschema %}

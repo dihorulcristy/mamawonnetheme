@@ -1,0 +1,96 @@
+{%- comment -%} FAQ Section {%- endcomment -%}
+
+<section class="faq-section section-padding">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="faq-list">
+      {%- for block in section.blocks -%}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-item__question" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-item__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_more_link -%}
+      <div style="text-align:center;margin-top:36px">
+        <a href="{{ section.settings.more_link }}" class="btn btn--secondary">{{ section.settings.more_text }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Häufige Fragen",
+  "class": "faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Häufige Fragen"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_link",
+      "label": "\"Mehr FAQ\" Link anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "more_text",
+      "label": "Link-Text",
+      "default": "Kontaktieren Sie uns"
+    },
+    {
+      "type": "url",
+      "id": "more_link",
+      "label": "Link-URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Frage",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Frage",
+          "default": "Wie hilft das Nestchen bei Reflux?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Antwort",
+          "default": "<p>Unser Nestchen verfügt über eine ergonomisch entwickelte 15° Neigung, die dafür sorgt, dass der Oberkörper Ihres Babys leicht erhöht liegt. Dies unterstützt die natürliche Verdauung und kann Reflux-Symptome deutlich reduzieren.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Häufige Fragen",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Wie hilft das Nestchen bei Reflux?", "answer": "<p>Unser Nestchen verfügt über eine ergonomisch entwickelte 15° Neigung, die die natürliche Verdauung unterstützt und Reflux-Symptome reduzieren kann.</p>" } },
+        { "type": "faq", "settings": { "question": "Ab welchem Alter kann mein Baby das Nestchen nutzen?", "answer": "<p>Unsere Produkte sind für Babys ab der Geburt bis ca. 12 Monate geeignet. Bitte beachten Sie die individuellen Größenangaben.</p>" } },
+        { "type": "faq", "settings": { "question": "Welche Materialien werden verwendet?", "answer": "<p>Wir verwenden ausschließlich 100% Bio-Baumwolle, die nach OEKO-TEX Standard 100 zertifiziert ist. Alle Materialien sind hypoallergen und frei von Schadstoffen.</p>" } },
+        { "type": "faq", "settings": { "question": "Wie pflege ich das Nestchen richtig?", "answer": "<p>Der Bezug ist bei 40°C waschbar und trocknergeeignet. Wir empfehlen die Verwendung eines milden Waschmittels ohne Weichspüler.</p>" } },
+        { "type": "faq", "settings": { "question": "Wie lange dauert der Versand?", "answer": "<p>Wir versenden innerhalb von 1-2 Werktagen. Die Lieferzeit beträgt in Deutschland 2-4 Werktage, nach Österreich 3-5 Werktage. Ab 50€ ist der Versand kostenlos.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

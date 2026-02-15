@@ -1,0 +1,71 @@
+{%- comment -%}
+  Product Card Snippet
+  Usage: {% render 'product-card', product: product, badge: 'bestseller' %}
+{%- endcomment -%}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__image-wrap">
+    {%- if product.featured_image -%}
+      <img
+        class="product-card__image product-card__image--primary"
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        width="600"
+        height="600"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__image' }}
+    {%- endif -%}
+
+    {%- if product.images.size > 1 -%}
+      <img
+        class="product-card__image product-card__image--hover"
+        src="{{ product.images[1] | image_url: width: 600 }}"
+        alt="{{ product.images[1].alt | escape }}"
+        width="600"
+        height="600"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    {%- if badge == 'bestseller' -%}
+      <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
+    {%- elsif badge == 'new' -%}
+      <span class="product-card__badge product-card__badge--new">Neu</span>
+    {%- elsif badge == 'limited' -%}
+      <span class="product-card__badge product-card__badge--limited">Limitiert</span>
+    {%- endif -%}
+
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-card__badge product-card__badge--sale">Angebot</span>
+    {%- endif -%}
+
+    <button type="button" class="product-card__quick-add" aria-label="{{ 'products.card.quick_add' | t }}">
+      {{ 'products.card.quick_add' | t | default: 'Schnell hinzufügen' }}
+    </button>
+  </a>
+
+  <div class="product-card__info">
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card__price">
+      <span>{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="product-card__rating">
+      <span class="product-card__stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </span>
+    </div>
+  </div>
+</div>

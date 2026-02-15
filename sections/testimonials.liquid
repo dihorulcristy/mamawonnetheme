@@ -1,0 +1,116 @@
+{%- comment -%} Testimonials Section {%- endcomment -%}
+
+<section class="testimonials section-padding">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__header">
+            {%- if block.settings.avatar != blank -%}
+              <img class="testimonial-card__avatar" src="{{ block.settings.avatar | image_url: width: 104 }}" alt="{{ block.settings.name }}" width="52" height="52" loading="lazy">
+            {%- else -%}
+              <div class="testimonial-card__avatar" style="background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:var(--color-secondary)">{{ block.settings.name | slice: 0 }}</div>
+            {%- endif -%}
+            <div class="testimonial-card__meta">
+              <div class="testimonial-card__name">{{ block.settings.name }}</div>
+              <div class="testimonial-card__location">{{ block.settings.location }}</div>
+            </div>
+          </div>
+
+          <div class="testimonial-card__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- endfor -%}
+          </div>
+
+          <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+          <span class="testimonial-card__badge">✓ {{ 'sections.testimonials.verified' | t | default: 'Verifizierter Kauf' }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_read_all -%}
+      <div style="text-align:center;margin-top:40px">
+        <a href="{{ section.settings.read_all_link }}" class="text-link">{{ section.settings.read_all_text }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kundenbewertungen",
+  "class": "testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Das sagen unsere Kunden"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_all",
+      "label": "\"Alle lesen\" anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "read_all_text",
+      "label": "\"Alle lesen\" Text",
+      "default": "Alle Bewertungen lesen"
+    },
+    {
+      "type": "url",
+      "id": "read_all_link",
+      "label": "Link zu Bewertungen"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Bewertung",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Foto"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Maria K."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Ort",
+          "default": "Berlin"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Bewertungstext",
+          "default": "Unser Baby schläft seit der ersten Nacht viel ruhiger. Absolut empfehlenswert!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kundenbewertungen",
+      "blocks": [
+        { "type": "testimonial", "settings": { "name": "Maria K.", "location": "Berlin", "text": "Unser Baby schläft seit der ersten Nacht viel ruhiger. Absolut empfehlenswert!" } },
+        { "type": "testimonial", "settings": { "name": "Thomas S.", "location": "München", "text": "Endlich ruhige Nächte! Die Qualität ist hervorragend und unser Kleiner liebt es." } },
+        { "type": "testimonial", "settings": { "name": "Anna M.", "location": "Hamburg", "text": "Als Kinderärztin empfehle ich MamaWonne allen Eltern. Durchdacht und sicher!" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

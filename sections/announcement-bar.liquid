@@ -1,0 +1,31 @@
+{%- comment -%} Announcement Bar Section {%- endcomment -%}
+
+<div class="announcement-bar" role="region" aria-label="Ankündigung">
+  <div class="container">
+    <p>{{ section.settings.text }}</p>
+  </div>
+  <button class="announcement-bar__close" aria-label="Schließen">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Ankündigungsleiste",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Ankündigungstext",
+      "default": "🚚 Kostenloser Versand ab 50€ | 30 Tage Rückgaberecht | 🇩🇪 Made with Love"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Hintergrundfarbe",
+      "default": "#8B7355"
+    }
+  ]
+}
+{% endschema %}

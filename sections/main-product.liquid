@@ -1,0 +1,181 @@
+{%- comment -%} Main Product Section {%- endcomment -%}
+
+<section class="product-page">
+  <div class="container">
+    <nav class="product-breadcrumbs" aria-label="Brotkrümel">
+      <a href="/">Startseite</a>
+      <span>/</span>
+      {%- if product.collections.size > 0 -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span>/</span>
+      {%- endif -%}
+      <span>{{ product.title }}</span>
+    </nav>
+
+    <div class="product-page__inner">
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          <img
+            src="{{ product.featured_image | image_url: width: 1000 }}"
+            alt="{{ product.featured_image.alt | escape }}"
+            width="1000"
+            height="1000"
+            loading="eager"
+          >
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images -%}
+              <button class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}" aria-label="Bild {{ forloop.index }}">
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" width="64" height="64" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product Info {%- endcomment -%}
+      <div class="product-info">
+        <h1 class="product-info__title">{{ product.title }}</h1>
+
+        <div class="product-info__rating">
+          <span class="product-info__rating-stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- endfor -%}
+          </span>
+          <span class="product-info__rating-count">({{ product.metafields.reviews.rating_count | default: '0' }} Bewertungen)</span>
+        </div>
+
+        <div class="product-info__price">
+          {{ product.selected_or_first_available_variant.price | money }}
+          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+            <span class="product-info__price--compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="product-info__description">
+            {{ product.description | strip_html | truncatewords: 30 }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Product Form {%- endcomment -%}
+        {% form 'product', product %}
+          {%- unless product.has_only_default_variant -%}
+            <div class="product-variants">
+              {%- for option in product.options_with_values -%}
+                <div>
+                  <span class="product-variants__label">{{ option.name }}</span>
+                  <div class="product-variants__options">
+                    {%- for value in option.values -%}
+                      <button type="button" class="variant-swatch{% if forloop.first %} is-selected{% endif %}">{{ value }}</button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="quantity-selector">
+            <button type="button" class="quantity-selector__btn" data-qty-minus aria-label="Weniger">−</button>
+            <input type="number" name="quantity" class="quantity-selector__input" value="1" min="1" aria-label="Menge">
+            <button type="button" class="quantity-selector__btn" data-qty-plus aria-label="Mehr">+</button>
+          </div>
+
+          <button type="submit" class="product-info__add-to-cart btn btn--primary btn--full"
+            {%- unless product.selected_or_first_available_variant.available %} disabled{% endunless -%}>
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {% endform %}
+
+        <div class="product-trust-badges">
+          <span class="product-trust-badges__item">🔒 Sichere Bezahlung</span>
+          <span class="product-trust-badges__item">🚚 Kostenloser Versand ab 50€</span>
+          <span class="product-trust-badges__item">↩️ 30 Tage Rückgaberecht</span>
+          <span class="product-trust-badges__item">🇩🇪 Made in Europe</span>
+        </div>
+
+        {%- comment -%} Product Accordions {%- endcomment -%}
+        <div class="product-accordion">
+          {%- for block in section.blocks -%}
+            <div class="product-accordion__item" {{ block.shopify_attributes }}>
+              <button class="product-accordion__trigger" aria-expanded="false">
+                <span>{{ block.settings.title }}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="product-accordion__content">
+                <div class="product-accordion__content-inner">
+                  {%- if block.type == 'description' -%}
+                    {{ product.description }}
+                  {%- else -%}
+                    {{ block.settings.content }}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produktseite",
+  "class": "product-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Beschreibung",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "Beschreibung"
+        }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Info-Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "Materialien"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Inhalt",
+          "default": "<p>Details zu diesem Tab hier einfügen.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produktseite",
+      "blocks": [
+        { "type": "description", "settings": { "title": "Beschreibung" } },
+        { "type": "tab", "settings": { "title": "Materialien", "content": "<p>100% Bio-Baumwolle, OEKO-TEX Standard 100 zertifiziert.</p>" } },
+        { "type": "tab", "settings": { "title": "Pflegehinweise", "content": "<p>Bei 40°C waschbar. Trocknergeeignet. Kein Weichspüler verwenden.</p>" } },
+        { "type": "tab", "settings": { "title": "Versand", "content": "<p>Versand innerhalb von 1-2 Werktagen. Kostenloser Versand ab 50€.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

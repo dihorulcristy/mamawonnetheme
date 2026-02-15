@@ -1,0 +1,29 @@
+<section class="collection-page">
+  <div class="container">
+    <h1 class="section-heading" style="margin-bottom:40px"><span>{{ 'collections.title' | t }}</span></h1>
+    <div class="product-grid">
+      {%- for collection in collections -%}
+        <div class="product-card">
+          <a href="{{ collection.url }}" class="product-card__image-wrap">
+            {%- if collection.image -%}
+              <img class="product-card__image" src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" width="600" height="600" loading="lazy">
+            {%- else -%}
+              {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'product-card__image' }}
+            {%- endif -%}
+          </a>
+          <div class="product-card__info">
+            <h3 class="product-card__title"><a href="{{ collection.url }}">{{ collection.title }}</a></h3>
+            <p style="font-size:0.85rem;color:#999">{{ collection.products_count }} Produkte</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Alle Kollektionen",
+  "settings": []
+}
+{% endschema %}

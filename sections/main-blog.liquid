@@ -1,0 +1,32 @@
+{%- comment -%} Main Blog Section {%- endcomment -%}
+<section class="blog-page">
+  <div class="container">
+    <h1 class="section-heading"><span style="display:inline-block;position:relative;padding-bottom:16px">{{ blog.title }}</span></h1>
+    <div class="blog-grid">
+      {%- for article in blog.articles -%}
+        <article class="blog-card">
+          {%- if article.image -%}
+            <a href="{{ article.url }}" class="blog-card__image">
+              <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" width="600" height="338" loading="lazy">
+            </a>
+          {%- endif -%}
+          <div class="blog-card__content">
+            <p class="blog-card__date">{{ article.published_at | date: '%d. %B %Y' }}</p>
+            <h2 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <div style="text-align:center;margin-top:40px">{{ paginate | default_pagination }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

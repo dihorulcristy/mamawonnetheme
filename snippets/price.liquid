@@ -1,0 +1,13 @@
+{%- comment -%}
+  Price snippet
+  Usage: {% render 'price', product: product %}
+{%- endcomment -%}
+
+<div class="price">
+  {%- if product.compare_at_price > product.price -%}
+    <span class="price__sale">{{ product.price | money }}</span>
+    <span class="price__compare">{{ product.compare_at_price | money }}</span>
+  {%- else -%}
+    <span class="price__regular">{{ product.price | money }}</span>
+  {%- endif -%}
+</div>
