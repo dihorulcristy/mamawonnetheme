@@ -2,43 +2,335 @@
     "sections": {
         "hero": {
             "type": "hero",
-            "settings": {}
+            "settings": {
+                "tagline": "MamaWonne",
+                "heading": "Ruhiger Schlaf für Ihr Baby – Von Anfang an",
+                "subheading": "Wissenschaftlich entwickelte Anti-Reflux Produkte für sicheren und erholsamen Babyschlaf",
+                "cta_text": "Jetzt entdecken",
+                "cta_secondary_text": "Mehr erfahren"
+            },
+            "blocks": {
+                "trust_1": {
+                    "type": "trust_badge",
+                    "settings": {
+                        "icon": "⭐",
+                        "text": "4.9/5 (2,500+ Bewertungen)"
+                    }
+                },
+                "trust_2": {
+                    "type": "trust_badge",
+                    "settings": {
+                        "icon": "🛡️",
+                        "text": "CE Zertifiziert"
+                    }
+                },
+                "trust_3": {
+                    "type": "trust_badge",
+                    "settings": {
+                        "icon": "💚",
+                        "text": "100% Baumwolle"
+                    }
+                }
+            },
+            "block_order": [
+                "trust_1",
+                "trust_2",
+                "trust_3"
+            ]
         },
         "trust-bar": {
             "type": "trust-bar",
-            "settings": {}
+            "settings": {},
+            "blocks": {
+                "tb_1": {
+                    "type": "trust_item",
+                    "settings": {
+                        "icon": "🚚",
+                        "text": "Kostenloser Versand ab 50€"
+                    }
+                },
+                "tb_2": {
+                    "type": "trust_item",
+                    "settings": {
+                        "icon": "↩️",
+                        "text": "30 Tage Rückgaberecht"
+                    }
+                },
+                "tb_3": {
+                    "type": "trust_item",
+                    "settings": {
+                        "icon": "🏆",
+                        "text": "Über 15.000 zufriedene Eltern"
+                    }
+                },
+                "tb_4": {
+                    "type": "trust_item",
+                    "settings": {
+                        "icon": "💬",
+                        "text": "Persönliche Beratung"
+                    }
+                }
+            },
+            "block_order": [
+                "tb_1",
+                "tb_2",
+                "tb_3",
+                "tb_4"
+            ]
         },
         "featured-products": {
             "type": "featured-products",
-            "settings": {}
+            "settings": {
+                "heading": "Unsere Bestseller",
+                "products_count": 4,
+                "show_view_all": true,
+                "view_all_text": "Alle Produkte ansehen"
+            }
         },
         "value-proposition": {
             "type": "value-proposition",
-            "settings": {}
+            "settings": {
+                "heading": "Warum MamaWonne?"
+            },
+            "blocks": {
+                "usp_1": {
+                    "type": "usp_card",
+                    "settings": {
+                        "icon": "🌿",
+                        "title": "Natürliche Materialien",
+                        "text": "100% Bio-Baumwolle, OEKO-TEX zertifiziert – sanft zur empfindlichen Babyhaut"
+                    }
+                },
+                "usp_2": {
+                    "type": "usp_card",
+                    "settings": {
+                        "icon": "👶",
+                        "title": "Wissenschaftlich entwickelt",
+                        "text": "Von Kinderärzten empfohlen – ergonomische 15° Neigung gegen Reflux"
+                    }
+                },
+                "usp_3": {
+                    "type": "usp_card",
+                    "settings": {
+                        "icon": "💝",
+                        "title": "Mit Liebe gemacht",
+                        "text": "Handgefertigt in Europa – höchste Qualitätsstandards für Ihr Baby"
+                    }
+                }
+            },
+            "block_order": [
+                "usp_1",
+                "usp_2",
+                "usp_3"
+            ]
         },
         "how-it-works": {
             "type": "how-it-works",
-            "settings": {}
+            "settings": {
+                "heading": "So hilft MamaWonne Ihrem Baby"
+            },
+            "blocks": {
+                "step_1": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Reflux kann den Schlaf Ihres Babys stören",
+                        "text": "Viele Babys leiden unter Reflux, was zu unruhigen Nächten und Unbehagen führt."
+                    }
+                },
+                "step_2": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Unsere 15° Neigung unterstützt die natürliche Verdauung",
+                        "text": "Die ergonomisch entwickelte Neigung hilft, Reflux auf natürliche Weise zu reduzieren."
+                    }
+                },
+                "step_3": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Ruhigere Nächte für Baby und Eltern",
+                        "text": "Besserer Schlaf für die ganze Familie – wissenschaftlich bestätigt."
+                    }
+                }
+            },
+            "block_order": [
+                "step_1",
+                "step_2",
+                "step_3"
+            ]
         },
         "testimonials": {
             "type": "testimonials",
-            "settings": {}
+            "settings": {
+                "heading": "Das sagen unsere Kunden",
+                "show_read_all": true,
+                "read_all_text": "Alle Bewertungen lesen"
+            },
+            "blocks": {
+                "rev_1": {
+                    "type": "testimonial",
+                    "settings": {
+                        "name": "Maria K.",
+                        "location": "Berlin",
+                        "text": "Unser Baby schläft seit der ersten Nacht viel ruhiger. Absolut empfehlenswert!"
+                    }
+                },
+                "rev_2": {
+                    "type": "testimonial",
+                    "settings": {
+                        "name": "Thomas S.",
+                        "location": "München",
+                        "text": "Endlich ruhige Nächte! Die Qualität ist hervorragend und unser Kleiner liebt es."
+                    }
+                },
+                "rev_3": {
+                    "type": "testimonial",
+                    "settings": {
+                        "name": "Anna M.",
+                        "location": "Hamburg",
+                        "text": "Als Kinderärztin empfehle ich MamaWonne allen Eltern. Durchdacht und sicher!"
+                    }
+                }
+            },
+            "block_order": [
+                "rev_1",
+                "rev_2",
+                "rev_3"
+            ]
         },
         "press-logos": {
             "type": "press-logos",
-            "settings": {}
+            "settings": {
+                "heading": "Bekannt aus"
+            },
+            "blocks": {
+                "logo_1": {
+                    "type": "logo",
+                    "settings": {
+                        "name": "Eltern Magazin"
+                    }
+                },
+                "logo_2": {
+                    "type": "logo",
+                    "settings": {
+                        "name": "Baby & Familie"
+                    }
+                },
+                "logo_3": {
+                    "type": "logo",
+                    "settings": {
+                        "name": "Öko-Test"
+                    }
+                },
+                "logo_4": {
+                    "type": "logo",
+                    "settings": {
+                        "name": "Stiftung Warentest"
+                    }
+                }
+            },
+            "block_order": [
+                "logo_1",
+                "logo_2",
+                "logo_3",
+                "logo_4"
+            ]
         },
         "instagram-feed": {
             "type": "instagram-feed",
-            "settings": {}
+            "settings": {
+                "heading": "Die #MamaWonne Familie",
+                "show_follow_btn": true,
+                "follow_text": "Folge uns auf Instagram"
+            },
+            "blocks": {
+                "img_1": {
+                    "type": "image"
+                },
+                "img_2": {
+                    "type": "image"
+                },
+                "img_3": {
+                    "type": "image"
+                },
+                "img_4": {
+                    "type": "image"
+                },
+                "img_5": {
+                    "type": "image"
+                },
+                "img_6": {
+                    "type": "image"
+                }
+            },
+            "block_order": [
+                "img_1",
+                "img_2",
+                "img_3",
+                "img_4",
+                "img_5",
+                "img_6"
+            ]
         },
         "newsletter": {
             "type": "newsletter",
-            "settings": {}
+            "settings": {
+                "heading": "10% Rabatt auf Ihre erste Bestellung",
+                "subheading": "Plus: Exklusive Tipps für besseren Babyschlaf",
+                "button_text": "Anmelden",
+                "consent_text": "Mit Ihrer Anmeldung stimmen Sie unserer Datenschutzerklärung zu. Sie können sich jederzeit abmelden."
+            }
         },
         "faq": {
             "type": "faq",
-            "settings": {}
+            "settings": {
+                "heading": "Häufige Fragen",
+                "show_more_link": true,
+                "more_text": "Kontaktieren Sie uns"
+            },
+            "blocks": {
+                "faq_1": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "Wie hilft das Nestchen bei Reflux?",
+                        "answer": "<p>Unser Nestchen verfügt über eine ergonomisch entwickelte 15° Neigung, die die natürliche Verdauung unterstützt und Reflux-Symptome reduzieren kann.</p>"
+                    }
+                },
+                "faq_2": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "Ab welchem Alter kann mein Baby das Nestchen nutzen?",
+                        "answer": "<p>Unsere Produkte sind für Babys ab der Geburt bis ca. 12 Monate geeignet. Bitte beachten Sie die individuellen Größenangaben.</p>"
+                    }
+                },
+                "faq_3": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "Welche Materialien werden verwendet?",
+                        "answer": "<p>Wir verwenden ausschließlich 100% Bio-Baumwolle, die nach OEKO-TEX Standard 100 zertifiziert ist. Alle Materialien sind hypoallergen und frei von Schadstoffen.</p>"
+                    }
+                },
+                "faq_4": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "Wie pflege ich das Nestchen richtig?",
+                        "answer": "<p>Der Bezug ist bei 40°C waschbar und trocknergeeignet. Wir empfehlen die Verwendung eines milden Waschmittels ohne Weichspüler.</p>"
+                    }
+                },
+                "faq_5": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "Wie lange dauert der Versand?",
+                        "answer": "<p>Wir versenden innerhalb von 1-2 Werktagen. Die Lieferzeit beträgt in Deutschland 2-4 Werktage, nach Österreich 3-5 Werktage. Ab 50€ ist der Versand kostenlos.</p>"
+                    }
+                }
+            },
+            "block_order": [
+                "faq_1",
+                "faq_2",
+                "faq_3",
+                "faq_4",
+                "faq_5"
+            ]
         }
     },
     "order": [

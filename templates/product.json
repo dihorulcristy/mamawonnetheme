@@ -2,11 +2,48 @@
     "sections": {
         "main-product": {
             "type": "main-product",
-            "settings": {}
+            "settings": {},
+            "blocks": {
+                "desc": {
+                    "type": "description",
+                    "settings": {
+                        "title": "Beschreibung"
+                    }
+                },
+                "materials": {
+                    "type": "tab",
+                    "settings": {
+                        "title": "Materialien",
+                        "content": "<p>100% Bio-Baumwolle, OEKO-TEX Standard 100 zertifiziert. Hypoallergen und frei von Schadstoffen.</p>"
+                    }
+                },
+                "care": {
+                    "type": "tab",
+                    "settings": {
+                        "title": "Pflegehinweise",
+                        "content": "<p>Bei 40°C waschbar. Trocknergeeignet. Kein Weichspüler verwenden.</p>"
+                    }
+                },
+                "shipping": {
+                    "type": "tab",
+                    "settings": {
+                        "title": "Versand",
+                        "content": "<p>Versand innerhalb von 1-2 Werktagen. Kostenloser Versand ab 50€. Lieferung in 2-4 Werktagen (DE) / 3-5 Werktagen (AT).</p>"
+                    }
+                }
+            },
+            "block_order": [
+                "desc",
+                "materials",
+                "care",
+                "shipping"
+            ]
         },
         "product-recommendations": {
             "type": "product-recommendations",
-            "settings": {}
+            "settings": {
+                "heading": "Das könnte Ihnen auch gefallen"
+            }
         }
     },
     "order": [
