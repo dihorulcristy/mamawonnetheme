@@ -601,125 +601,137 @@
   .sale-sticky-cta__left { flex-shrink: 0; text-align: center; }
   .sale-sticky-cta .sale-cta-btn { padding: 14px 20px; font-size: 1rem; animation: none; flex: 1; }
 
+  /* ===== GLOBAL BOX-SIZING ===== */
+  .sale-landing, .sale-landing *, .sale-landing *::before, .sale-landing *::after { box-sizing: border-box; }
+  .sale-landing { overflow-x: hidden; width: 100%; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    /* Container padding */
-    .sale-landing .container { padding-left: 16px; padding-right: 16px; }
+    /* Force container padding on ALL containers inside sale section */
+    .sale-landing .container { padding-left: 5vw !important; padding-right: 5vw !important; max-width: 100% !important; width: 100% !important; }
 
-    /* Urgency bar — prevent text cutoff */
-    .sale-urgency-bar { font-size: 0.78rem; padding: 8px 12px; position: relative; top: auto; }
+    /* Urgency bar */
+    .sale-urgency-bar { font-size: clamp(0.7rem, 2.5vw, 0.9rem); padding: 8px 4vw; position: relative; top: auto; }
     .sale-urgency-bar .container { flex-direction: column; gap: 4px; }
-    .sale-countdown { font-size: 1.1rem; }
+    .sale-countdown { font-size: clamp(0.95rem, 3.5vw, 1.2rem); }
 
     /* Hero */
-    .sale-hero { padding: 20px 0; }
-    .sale-hero__inner { grid-template-columns: 1fr; gap: 20px; }
-    .sale-hero__main-image { max-height: 350px; aspect-ratio: auto; border-radius: 12px; }
-    .sale-hero__main-image img { height: 350px; object-fit: contain; background: var(--sale-cream); }
-    .sale-hero__thumbs { gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .sale-hero__thumb { width: 56px; height: 56px; flex-shrink: 0; border-radius: 8px; }
-    .sale-hero__title { font-size: 1.25rem; margin: 8px 0; }
-    .sale-hero__rating { font-size: 0.8rem; gap: 4px; }
-    .sale-price-current { font-size: 1.6rem; }
-    .sale-price-old { font-size: 0.95rem; }
+    .sale-hero { padding: 16px 0; }
+    .sale-hero__inner { grid-template-columns: 1fr; gap: 16px; }
+    .sale-hero__main-image { max-height: 55vw; aspect-ratio: auto; border-radius: 12px; }
+    .sale-hero__main-image img { height: 55vw; max-height: 350px; object-fit: contain; background: var(--sale-cream); }
+    .sale-hero__thumbs { gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    .sale-hero__thumb { width: 14vw; max-width: 60px; height: 14vw; max-height: 60px; flex-shrink: 0; border-radius: 8px; }
+    .sale-hero__title { font-size: clamp(1.05rem, 4.5vw, 1.4rem); margin: 8px 0; line-height: 1.35; }
+    .sale-hero__rating { font-size: clamp(0.72rem, 2.5vw, 0.85rem); gap: 4px; }
+    .sale-price-current { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+    .sale-price-old { font-size: clamp(0.85rem, 3vw, 1rem); }
+    .sale-hero__price { gap: 8px; margin: 8px 0; }
     .sale-badges-row { gap: 6px; }
-    .sale-badge { font-size: 0.7rem; padding: 4px 8px; }
+    .sale-badge { font-size: clamp(0.65rem, 2.2vw, 0.75rem); padding: 3px 8px; }
 
-    /* Stock indicator */
-    .sale-stock-indicator { padding: 12px; margin: 12px 0; }
-    .sale-stock-text { font-size: 0.8rem; }
+    /* Stock indicator — proper spacing from edges */
+    .sale-stock-indicator { padding: 12px; margin: 12px 0; border-radius: 10px; }
+    .sale-stock-text { font-size: clamp(0.72rem, 2.5vw, 0.85rem); line-height: 1.5; }
+    .sale-stock-viewers { display: block; margin-top: 4px; }
 
     /* Benefits mini */
-    .sale-hero__benefits-mini li { font-size: 0.85rem; padding: 4px 0; }
+    .sale-hero__benefits-mini { margin: 12px 0; }
+    .sale-hero__benefits-mini li { font-size: clamp(0.78rem, 2.8vw, 0.9rem); padding: 3px 0; line-height: 1.5; }
 
-    /* CTA */
-    .sale-cta-btn { padding: 16px 24px; font-size: 1rem; }
-    .sale-cta-btn--large { padding: 18px 24px; font-size: 1.1rem; }
+    /* CTA — prevent overflow */
+    .sale-cta-btn { padding: 14px 16px; font-size: clamp(0.88rem, 3.2vw, 1.05rem); width: 100%; max-width: 100%; display: block; }
+    .sale-cta-btn--large { padding: 16px 20px; font-size: clamp(0.95rem, 3.5vw, 1.15rem); }
 
     /* Payment & trust */
-    .sale-payment-icons { font-size: 0.75rem; }
-    .sale-hero__trust-strip { grid-template-columns: 1fr 1fr; gap: 4px; }
-    .sale-trust-item { font-size: 0.75rem; padding: 4px 0; }
+    .sale-payment-icons { font-size: clamp(0.7rem, 2.3vw, 0.8rem); }
+    .sale-hero__trust-strip { grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 12px; }
+    .sale-trust-item { font-size: clamp(0.7rem, 2.3vw, 0.8rem); padding: 3px 0; gap: 4px; }
 
     /* Problem */
-    .sale-problem { padding: 48px 0; }
-    .sale-problem__grid { grid-template-columns: 1fr; gap: 16px; }
-    .sale-problem__card { padding: 24px 16px; }
-    .sale-problem__icon { font-size: 2rem; }
-
-    /* Section titles */
-    .sale-section-title { font-size: 1.3rem; padding: 0 8px; }
-    .sale-section-subtitle { font-size: 0.9rem; padding: 0 8px; }
+    .sale-problem { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-section-title { font-size: clamp(1.15rem, 4.5vw, 1.6rem); padding: 0; }
+    .sale-section-subtitle { font-size: clamp(0.82rem, 3vw, 0.95rem); padding: 0; }
+    .sale-problem__grid { grid-template-columns: 1fr; gap: 12px; }
+    .sale-problem__card { padding: 20px 16px; border-radius: 12px; }
+    .sale-problem__icon { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 10px; }
+    .sale-problem__card h3 { font-size: clamp(0.95rem, 3.5vw, 1.1rem); }
+    .sale-problem__card p { font-size: clamp(0.82rem, 2.8vw, 0.92rem); }
 
     /* Benefits */
-    .sale-benefits { padding: 48px 0; }
-    .sale-benefits__grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .sale-benefit { padding: 20px 12px; }
-    .sale-benefit__icon { font-size: 2rem; margin-bottom: 8px; }
-    .sale-benefit h3 { font-size: 0.9rem; }
-    .sale-benefit p { font-size: 0.8rem; }
+    .sale-benefits { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-benefits__grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+    .sale-benefit { padding: 16px 10px; border-radius: 12px; }
+    .sale-benefit__icon { font-size: clamp(1.5rem, 5vw, 2rem); margin-bottom: 6px; }
+    .sale-benefit h3 { font-size: clamp(0.8rem, 2.8vw, 0.95rem); margin-bottom: 4px; }
+    .sale-benefit p { font-size: clamp(0.72rem, 2.5vw, 0.85rem); }
 
     /* How it works */
-    .sale-how { padding: 48px 0; }
-    .sale-how__steps { flex-direction: column; align-items: center; gap: 8px; }
-    .sale-how__step { padding: 20px 16px; }
-    .sale-how__number { width: 44px; height: 44px; font-size: 1.2rem; }
-    .sale-how__connector { transform: rotate(90deg); padding: 0; font-size: 1.5rem; }
+    .sale-how { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-how__steps { flex-direction: column; align-items: center; gap: 4px; margin-top: 24px; }
+    .sale-how__step { padding: 16px 12px; max-width: 100%; }
+    .sale-how__number { width: 42px; height: 42px; font-size: 1.1rem; }
+    .sale-how__step h3 { font-size: clamp(0.9rem, 3.2vw, 1.05rem); }
+    .sale-how__step p { font-size: clamp(0.8rem, 2.8vw, 0.9rem); }
+    .sale-how__connector { transform: rotate(90deg); padding: 0; font-size: 1.2rem; line-height: 1; }
 
     /* Reviews */
-    .sale-reviews { padding: 48px 0; }
-    .sale-reviews__summary { flex-direction: column; gap: 16px; padding: 16px; }
-    .sale-reviews__big-num { font-size: 2.5rem; }
+    .sale-reviews { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-reviews__summary { flex-direction: column; gap: 12px; padding: 16px; margin: 20px auto; }
+    .sale-reviews__big-num { font-size: clamp(2rem, 8vw, 2.8rem); }
+    .sale-reviews__score > span:last-child { font-size: clamp(0.65rem, 2.2vw, 0.75rem); }
     .sale-reviews__grid { grid-template-columns: 1fr; gap: 12px; }
-    .sale-review-card { padding: 16px; }
-    .sale-review-card h4 { font-size: 0.9rem; }
-    .sale-review-card p { font-size: 0.82rem; }
+    .sale-review-card { padding: 16px; border-radius: 12px; }
+    .sale-review-card h4 { font-size: clamp(0.85rem, 3vw, 0.95rem); }
+    .sale-review-card p { font-size: clamp(0.78rem, 2.6vw, 0.88rem); }
 
     /* Mid CTA */
-    .sale-mid-cta { padding: 48px 0; }
-    .sale-mid-cta__inner h2 { font-size: 1.2rem; }
-    .sale-mid-cta__inner > p { font-size: 0.9rem; }
+    .sale-mid-cta { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-mid-cta__inner h2 { font-size: clamp(1.05rem, 4vw, 1.4rem); }
+    .sale-mid-cta__inner > p { font-size: clamp(0.82rem, 3vw, 0.95rem); }
+    .sale-mid-cta .sale-cta-btn { max-width: 100%; }
 
     /* Guarantee */
-    .sale-guarantee { padding: 40px 0; }
-    .sale-guarantee__inner { flex-direction: column; text-align: center; gap: 16px; }
-    .sale-guarantee__icon { font-size: 3rem; }
-    .sale-guarantee__content h2 { font-size: 1.2rem; }
-    .sale-guarantee__content p { font-size: 0.88rem; }
-    .sale-guarantee__badges { justify-content: center; flex-direction: column; gap: 8px; }
+    .sale-guarantee { padding: clamp(28px, 7vw, 48px) 0; }
+    .sale-guarantee__inner { flex-direction: column; text-align: center; gap: 12px; }
+    .sale-guarantee__icon { font-size: clamp(2.5rem, 8vw, 3.5rem); }
+    .sale-guarantee__content h2 { font-size: clamp(1.05rem, 3.8vw, 1.3rem); }
+    .sale-guarantee__content p { font-size: clamp(0.82rem, 2.8vw, 0.92rem); }
+    .sale-guarantee__badges { justify-content: center; flex-direction: column; gap: 6px; font-size: clamp(0.78rem, 2.6vw, 0.88rem); }
 
     /* Gallery */
-    .sale-gallery { padding: 48px 0; }
+    .sale-gallery { padding: clamp(32px, 8vw, 56px) 0; }
     .sale-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
 
     /* FAQ */
-    .sale-faq { padding: 48px 0; }
-    .sale-faq__item summary { font-size: 0.9rem; padding: 16px 0; }
-    .sale-faq__item p { font-size: 0.85rem; }
+    .sale-faq { padding: clamp(32px, 8vw, 56px) 0; }
+    .sale-faq__list { margin-top: 20px; }
+    .sale-faq__item summary { font-size: clamp(0.85rem, 3vw, 0.95rem); padding: 14px 0; }
+    .sale-faq__item p { font-size: clamp(0.8rem, 2.8vw, 0.9rem); }
 
     /* Final CTA */
-    .sale-final-cta { padding: 48px 0 100px; }
-    .sale-final-cta__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-    .sale-final-cta__product img { max-height: 280px; object-fit: contain; margin: 0 auto; }
-    .sale-final-cta__content h2 { font-size: 1.2rem; }
+    .sale-final-cta { padding: clamp(32px, 8vw, 56px) 0 100px; }
+    .sale-final-cta__inner { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+    .sale-final-cta__product { max-width: 70vw; margin: 0 auto; }
+    .sale-final-cta__product img { max-height: 250px; object-fit: contain; }
+    .sale-final-cta__content h2 { font-size: clamp(1.05rem, 3.8vw, 1.3rem); }
+    .sale-final-cta .sale-hero__benefits-mini { text-align: left; }
 
     /* Sticky CTA */
     .sale-sticky-cta { display: block; }
-    .sale-sticky-cta__inner { gap: 10px; }
-    .sale-sticky-cta .sale-cta-btn { padding: 12px 16px; font-size: 0.9rem; }
+    .sale-sticky-cta__inner { gap: 10px; padding: 0 4vw; }
+    .sale-sticky-cta .sale-cta-btn { padding: 12px 14px; font-size: clamp(0.82rem, 2.8vw, 0.95rem); flex: 1; width: auto; }
+    .sale-sticky-cta__left .sale-price-current { font-size: clamp(1rem, 3.5vw, 1.3rem); }
 
-    /* Hide mobile bottom nav when sticky CTA is shown */
+    /* Hide mobile bottom nav */
     .mobile-bottom-nav { display: none !important; }
   }
 
-  /* Extra small screens */
+  /* Extra small (iPhone SE, Galaxy S small) */
   @media (max-width: 380px) {
-    .sale-hero__title { font-size: 1.1rem; }
-    .sale-price-current { font-size: 1.4rem; }
-    .sale-section-title { font-size: 1.15rem; }
     .sale-benefits__grid { grid-template-columns: 1fr; }
     .sale-hero__trust-strip { grid-template-columns: 1fr; }
-    .sale-cta-btn { font-size: 0.9rem; padding: 14px 16px; }
+    .sale-gallery__grid { grid-template-columns: 1fr; }
   }
 </style>
 
