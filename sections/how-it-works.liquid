@@ -19,7 +19,7 @@
                 loading="lazy"
               >
             {%- else -%}
-              {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag }}
+              <img src="{{ 'step-' | append: forloop.index | append: '.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="800" height="500" loading="lazy">
             {%- endif -%}
           </div>
           <div class="how-step__content">
