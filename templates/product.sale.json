@@ -1,0 +1,15 @@
+{
+    "sections": {
+        "sale-landing": {
+            "type": "product-sale-landing",
+            "settings": {
+                "reviews_count": 500,
+                "sold_count": 2400,
+                "viewers_count": 14
+            }
+        }
+    },
+    "order": [
+        "sale-landing"
+    ]
+}

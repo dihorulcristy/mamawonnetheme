@@ -1,0 +1,715 @@
+{%- comment -%} Sale Landing Page Section — CONVERSION OPTIMIZED {%- endcomment -%}
+
+<section class="sale-landing">
+
+  {%- comment -%} ===== URGENCY BAR ===== {%- endcomment -%}
+  <div class="sale-urgency-bar">
+    <div class="container">
+      <span>🔥 <strong>Aktion endet in:</strong></span>
+      <span class="sale-countdown" id="sale-countdown">00:00:00</span>
+      <span>— <strong>Nur solange der Vorrat reicht!</strong></span>
+    </div>
+  </div>
+
+  {%- comment -%} ===== HERO: Product + CTA ===== {%- endcomment -%}
+  <div class="sale-hero">
+    <div class="container">
+      <div class="sale-hero__inner">
+        <div class="sale-hero__gallery">
+          <div class="sale-hero__main-image" id="sale-main-img">
+            {%- if product.featured_image -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 900 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                width="900" height="900" loading="eager" fetchpriority="high"
+              >
+            {%- endif -%}
+          </div>
+          <div class="sale-hero__thumbs">
+            {%- for image in product.images limit: 6 -%}
+              <div class="sale-hero__thumb{% if forloop.first %} active{% endif %}" data-full="{{ image | image_url: width: 900 }}">
+                <img src="{{ image | image_url: width: 100 }}" alt="{{ image.alt | escape }}" width="100" height="100" loading="eager">
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <div class="sale-hero__info">
+          <div class="sale-badges-row">
+            <span class="sale-badge sale-badge--hot">🔥 Bestseller</span>
+            <span class="sale-badge sale-badge--limited">⏰ Begrenztes Angebot</span>
+          </div>
+
+          <h1 class="sale-hero__title">{{ product.title }}</h1>
+
+          <div class="sale-hero__rating">
+            <span class="sale-stars">★★★★★</span>
+            <span class="sale-rating-text">4.9/5</span>
+            <span class="sale-rating-sep">|</span>
+            <span class="sale-reviews-link">{{ section.settings.reviews_count }}+ Bewertungen</span>
+            <span class="sale-rating-sep">|</span>
+            <span class="sale-sold-count">🛒 {{ section.settings.sold_count }}+ verkauft</span>
+          </div>
+
+          <div class="sale-hero__price">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="sale-price-old">{{ product.compare_at_price | money }}</span>
+            {%- endif -%}
+            <span class="sale-price-current">{{ product.price | money }}</span>
+            {%- if product.compare_at_price > product.price -%}
+              {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              <span class="sale-badge sale-badge--save">Spare {{ savings }}%</span>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Stock urgency {%- endcomment -%}
+          <div class="sale-stock-indicator">
+            <div class="sale-stock-bar">
+              <div class="sale-stock-bar__fill" style="width: 23%"></div>
+            </div>
+            <p class="sale-stock-text">⚡ <strong>Nur noch wenige auf Lager!</strong> <span class="sale-stock-viewers">{{ section.settings.viewers_count }} Personen sehen sich dieses Produkt gerade an</span></p>
+          </div>
+
+          <ul class="sale-hero__benefits-mini">
+            <li>✅ <strong>Medizinisch empfohlen</strong> gegen Plattkopf (Plagiozephalie)</li>
+            <li>✅ <strong>Ergonomischer Memory-Foam</strong> — perfekte Druckverteilung</li>
+            <li>✅ <strong>OEKO-TEX zertifiziert</strong> — 100% schadstofffrei</li>
+            <li>✅ <strong>Für Babys 0-12 Monate</strong> — die entscheidende Phase</li>
+          </ul>
+
+          {%- form 'product', product -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+            {%- if product.variants.size > 1 -%}
+              <div class="sale-variants">
+                {%- for variant in product.variants -%}
+                  <label class="sale-variant-option{% if forloop.first %} active{% endif %}">
+                    <input type="radio" name="id" value="{{ variant.id }}"{% if forloop.first %} checked{% endif %}>
+                    <span>{{ variant.title }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            <button type="submit" class="sale-cta-btn sale-cta-btn--primary" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}
+                🛒 JETZT BESTELLEN — {{ product.price | money }}
+              {%- else -%}
+                Ausverkauft
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+
+          <div class="sale-payment-icons">
+            <span>💳</span> Visa, Mastercard, PayPal, Klarna, Apple Pay
+          </div>
+
+          <div class="sale-hero__trust-strip">
+            <div class="sale-trust-item"><span>🚚</span> Kostenloser Versand ab 100€</div>
+            <div class="sale-trust-item"><span>🔒</span> Sichere SSL-Bezahlung</div>
+            <div class="sale-trust-item"><span>↩️</span> 14 Tage Rückgaberecht</div>
+            <div class="sale-trust-item"><span>📞</span> Persönliche Beratung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== PROBLEM / AGITATE ===== {%- endcomment -%}
+  <div class="sale-problem">
+    <div class="container">
+      <span class="sale-section-label">Das Problem</span>
+      <h2 class="sale-section-title">Wussten Sie, dass <strong style="color:var(--sale-red)">47% aller Babys</strong> eine Kopfverformung entwickeln?</h2>
+      <p class="sale-section-subtitle">Lagebedingte Plagiozephalie ist häufiger als Sie denken — aber <strong>vermeidbar</strong>.</p>
+
+      <div class="sale-problem__grid">
+        <div class="sale-problem__card">
+          <div class="sale-problem__icon">⚠️</div>
+          <h3>Plattkopf-Syndrom</h3>
+          <p>Babys verbringen bis zu <strong>20 Stunden täglich</strong> im Liegen. Der einseitige Druck auf den noch weichen Schädel führt zu sichtbaren Verformungen — oft unbemerkt.</p>
+        </div>
+        <div class="sale-problem__card sale-problem__card--highlight">
+          <div class="sale-problem__icon">⏰</div>
+          <h3>Die Zeit läuft</h3>
+          <p>Die <strong>Schädelknochen härten</strong> mit jedem Monat. Nach dem 12. Monat ist eine natürliche Korrektur kaum noch möglich. <strong>Je früher Sie handeln, desto besser.</strong></p>
+        </div>
+        <div class="sale-problem__card">
+          <div class="sale-problem__icon">💡</div>
+          <h3>Die Lösung</h3>
+          <p>Unser <strong>ergonomisches Kopfkissen</strong> verteilt den Druck gleichmäßig und unterstützt die natürliche, runde Kopfform — <strong>ab dem ersten Tag</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== PRODUCT BENEFITS ===== {%- endcomment -%}
+  <div class="sale-benefits">
+    <div class="container">
+      <span class="sale-section-label">Vorteile</span>
+      <h2 class="sale-section-title">Warum tausende Eltern unserem Babykissen vertrauen</h2>
+      <div class="sale-benefits__grid">
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">🧠</div>
+          <h3>Ergonomisches Design</h3>
+          <p>Die spezielle Mulde entlastet empfindliche Stellen am Hinterkopf und fördert eine natürliche, runde Kopfform.</p>
+        </div>
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">🌿</div>
+          <h3>Premium Materialien</h3>
+          <p>Hypoallergener Memory-Foam mit Bezug aus 100% Bio-Baumwolle. OEKO-TEX Standard 100 zertifiziert.</p>
+        </div>
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">👶</div>
+          <h3>0-12 Monate</h3>
+          <p>Entwickelt für die entscheidende Phase der Kopfentwicklung — von Geburt an einsetzbar.</p>
+        </div>
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">🛏️</div>
+          <h3>Überall einsetzbar</h3>
+          <p>Kinderbett, Kinderwagen, Wiege, Babyschale — kompakt und leicht zu transportieren.</p>
+        </div>
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">🧼</div>
+          <h3>Einfache Pflege</h3>
+          <p>Abnehmbarer Bezug, bei 40°C waschbar. Hygienisch und pflegeleicht für den Alltag.</p>
+        </div>
+        <div class="sale-benefit">
+          <div class="sale-benefit__icon">🏥</div>
+          <h3>Von Experten empfohlen</h3>
+          <p>Kinderärzte und Orthopäden empfehlen Lagerungskissen zur Vorbeugung von Plagiozephalie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
+  <div class="sale-how">
+    <div class="container">
+      <span class="sale-section-label">So einfach geht's</span>
+      <h2 class="sale-section-title">In 3 Schritten zur gesunden Kopfform</h2>
+      <div class="sale-how__steps">
+        <div class="sale-how__step">
+          <div class="sale-how__number">1</div>
+          <h3>Kissen platzieren</h3>
+          <p>Einfach ins Bettchen, den Kinderwagen oder die Wiege legen — passt überall hinein.</p>
+        </div>
+        <div class="sale-how__connector">→</div>
+        <div class="sale-how__step">
+          <div class="sale-how__number">2</div>
+          <h3>Baby hinlegen</h3>
+          <p>Der Kopf ruht sanft in der ergonomischen Mulde — bequem, sicher und natürlich.</p>
+        </div>
+        <div class="sale-how__connector">→</div>
+        <div class="sale-how__step">
+          <div class="sale-how__number">3</div>
+          <h3>Ergebnis sehen</h3>
+          <p>Bereits nach 2-4 Wochen berichten Eltern von sichtbaren Verbesserungen der Kopfform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== SOCIAL PROOF — Reviews ===== {%- endcomment -%}
+  <div class="sale-reviews">
+    <div class="container">
+      <span class="sale-section-label">Kundenstimmen</span>
+      <h2 class="sale-section-title">{{ section.settings.reviews_count }}+ zufriedene Familien vertrauen uns</h2>
+
+      <div class="sale-reviews__summary">
+        <div class="sale-reviews__score">
+          <span class="sale-reviews__big-num">4.9</span>
+          <span class="sale-stars sale-stars--large">★★★★★</span>
+          <span>basierend auf {{ section.settings.reviews_count }}+ Bewertungen</span>
+        </div>
+        <div class="sale-reviews__bars">
+          <div class="sale-bar-row"><span>5 ★</span><div class="sale-bar"><div class="sale-bar__fill" style="width:89%"></div></div><span>89%</span></div>
+          <div class="sale-bar-row"><span>4 ★</span><div class="sale-bar"><div class="sale-bar__fill" style="width:8%"></div></div><span>8%</span></div>
+          <div class="sale-bar-row"><span>3 ★</span><div class="sale-bar"><div class="sale-bar__fill" style="width:2%"></div></div><span>2%</span></div>
+          <div class="sale-bar-row"><span>2 ★</span><div class="sale-bar"><div class="sale-bar__fill" style="width:1%"></div></div><span>1%</span></div>
+          <div class="sale-bar-row"><span>1 ★</span><div class="sale-bar"><div class="sale-bar__fill" style="width:0%"></div></div><span>0%</span></div>
+        </div>
+      </div>
+
+      <div class="sale-reviews__grid">
+        <div class="sale-review-card">
+          <div class="sale-review-card__header">
+            <span class="sale-stars">★★★★★</span>
+            <span class="sale-review-card__verified">✅ Verifizierter Kauf</span>
+          </div>
+          <h4>"Plattkopf innerhalb von 4 Wochen korrigiert!"</h4>
+          <p>"Wir haben das Kissen ab der 3. Woche benutzt. Unser Kinderarzt war beeindruckt — nach 4 Wochen war die Abflachung deutlich zurückgegangen. Absolut empfehlenswert für alle neuen Eltern!"</p>
+          <div class="sale-review-card__author">
+            <strong>Laura M.</strong> <span>— Berlin</span>
+          </div>
+        </div>
+        <div class="sale-review-card">
+          <div class="sale-review-card__header">
+            <span class="sale-stars">★★★★★</span>
+            <span class="sale-review-card__verified">✅ Verifizierter Kauf</span>
+          </div>
+          <h4>"Von unserer Kinderärztin ausdrücklich empfohlen"</h4>
+          <p>"Unsere Ärztin hat uns gesagt, wir sollen ein Lagerungskissen verwenden. Dieses hier ist perfekt — tolle Qualität, mein Baby schläft super darauf und der Kopf ist schön rund geblieben."</p>
+          <div class="sale-review-card__author">
+            <strong>Sandra K.</strong> <span>— München</span>
+          </div>
+        </div>
+        <div class="sale-review-card">
+          <div class="sale-review-card__header">
+            <span class="sale-stars">★★★★★</span>
+            <span class="sale-review-card__verified">✅ Verifizierter Kauf</span>
+          </div>
+          <h4>"Sofort bestellt, sofort verliebt!"</h4>
+          <p>"Die Qualität ist hervorragend, der Bezug butterweich. Haben es für unser zweites Kind nochmal bestellt! Es passt perfekt in den Kinderwagen und ins Bettchen."</p>
+          <div class="sale-review-card__author">
+            <strong>Anna W.</strong> <span>— Hamburg</span>
+          </div>
+        </div>
+        <div class="sale-review-card">
+          <div class="sale-review-card__header">
+            <span class="sale-stars">★★★★★</span>
+            <span class="sale-review-card__verified">✅ Verifizierter Kauf</span>
+          </div>
+          <h4>"Hätte ich schon beim ersten Kind gebraucht!"</h4>
+          <p>"Bei unserem ersten Kind hatten wir leider einen leichten Plattkopf. Beim zweiten Kind haben wir von Tag 1 dieses Kissen verwendet — perfekter runder Kopf. Warum wusste ich das vorher nicht?"</p>
+          <div class="sale-review-card__author">
+            <strong>Thomas R.</strong> <span>— Frankfurt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== MID-PAGE CTA WITH URGENCY ===== {%- endcomment -%}
+  <div class="sale-mid-cta">
+    <div class="container">
+      <div class="sale-mid-cta__inner">
+        <span class="sale-mid-cta__badge">⏰ Begrenztes Angebot</span>
+        <h2>Schützen Sie die Kopfform Ihres Babys — bevor es zu spät ist</h2>
+        <p>Die Schädelknochen Ihres Babys werden jeden Tag härter. Je früher Sie beginnen, desto besser das Ergebnis.</p>
+        <a href="#sale-order" class="sale-cta-btn sale-cta-btn--primary sale-cta-btn--large">
+          🛒 JETZT BESTELLEN — {{ product.price | money }}
+        </a>
+        <div class="sale-mid-cta__guarantee">
+          <span>🛡️</span> 14 Tage Geld-zurück-Garantie — kein Risiko für Sie
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== GUARANTEE / RISK REVERSAL ===== {%- endcomment -%}
+  <div class="sale-guarantee">
+    <div class="container">
+      <div class="sale-guarantee__inner">
+        <div class="sale-guarantee__icon">🛡️</div>
+        <div class="sale-guarantee__content">
+          <h2>Unsere Zufriedenheitsgarantie</h2>
+          <p>Wir sind von unserem Babykissen zu <strong>100% überzeugt</strong>. Sollten Sie oder Ihr Baby nicht zufrieden sein, erhalten Sie innerhalb von <strong>14 Tagen Ihr Geld zurück</strong> — ohne Wenn und Aber. Kein Risiko, kein Kleingedrucktes.</p>
+          <div class="sale-guarantee__badges">
+            <span>✅ 14 Tage Rückgaberecht</span>
+            <span>✅ Kostenlose Rücksendung</span>
+            <span>✅ Sofortige Erstattung</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== PRODUCT IMAGES SHOWCASE ===== {%- endcomment -%}
+  {%- if product.images.size > 1 -%}
+    <div class="sale-gallery">
+      <div class="container">
+        <h2 class="sale-section-title">Produktdetails im Detail</h2>
+        <div class="sale-gallery__grid">
+          {%- for image in product.images limit: 8 -%}
+            <div class="sale-gallery__item">
+              <img src="{{ image | image_url: width: 600 }}" alt="{{ image.alt | default: product.title | escape }}" width="600" height="600" loading="lazy">
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  <div class="sale-faq">
+    <div class="container">
+      <span class="sale-section-label">FAQ</span>
+      <h2 class="sale-section-title">Häufige Fragen</h2>
+      <div class="sale-faq__list">
+        <details class="sale-faq__item" open>
+          <summary>Ab welchem Alter kann ich das Kissen verwenden?</summary>
+          <p>Ab der Geburt bis ca. 12 Monate. Je früher Sie beginnen, desto effektiver die Prävention. Die kritische Phase für die Schädelentwicklung liegt in den <strong>ersten 6 Monaten</strong>.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Ist das Kissen sicher für mein Baby?</summary>
+          <p>Absolut. Alle Materialien sind <strong>OEKO-TEX Standard 100</strong> zertifiziert, hypoallergen und frei von Schadstoffen. Das ergonomische Design wurde mit Kinderärzten entwickelt und getestet.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Hilft es auch, wenn bereits eine Abflachung vorhanden ist?</summary>
+          <p>Ja! Unser Kissen unterstützt die <strong>natürliche Korrektur</strong> bestehender Verformungen. Viele Eltern berichten von sichtbaren Verbesserungen nach nur 2-4 Wochen regelmäßiger Nutzung.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Wie wasche ich das Kissen?</summary>
+          <p>Der Bezug ist abnehmbar und bei <strong>40°C waschbar</strong>. Nutzen Sie ein mildes Waschmittel ohne Weichspüler. Das Memory-Foam Innenkissen bitte nur feucht abwischen.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Kann ich es im Kinderwagen verwenden?</summary>
+          <p>Ja! Das kompakte Design (23x23cm) passt perfekt in <strong>Kinderwagen, Kinderbett, Wiege und Babyschale</strong>. Ideal für unterwegs und zuhause.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Was ist, wenn mein Baby damit nicht schläft?</summary>
+          <p>Kein Risiko! Sie haben <strong>14 Tage Rückgaberecht</strong>. Sollte Ihr Baby des Kissen nicht annehmen, erhalten Sie Ihr Geld zurück — garantiert.</p>
+        </details>
+        <details class="sale-faq__item">
+          <summary>Wie schnell ist der Versand?</summary>
+          <p>Wir versenden innerhalb von <strong>1-2 Werktagen</strong>. Lieferung in 2-4 Werktagen (DE), 3-5 Werktagen (AT/CH). Ab 100€ ist der Versand kostenlos.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== FINAL CTA ===== {%- endcomment -%}
+  <div class="sale-final-cta" id="sale-order">
+    <div class="container">
+      <div class="sale-final-cta__inner">
+        <div class="sale-final-cta__product">
+          {%- if product.featured_image -%}
+            <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" width="500" height="500">
+          {%- endif -%}
+        </div>
+        <div class="sale-final-cta__content">
+          <span class="sale-badge sale-badge--hot" style="margin-bottom:12px;display:inline-block">🔥 Meistverkauft</span>
+          <h2>{{ product.title }}</h2>
+          <div class="sale-hero__rating" style="margin:8px 0">
+            <span class="sale-stars">★★★★★</span> 4.9/5 — {{ section.settings.reviews_count }}+ Bewertungen
+          </div>
+          <div class="sale-hero__price" style="margin:12px 0">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="sale-price-old">{{ product.compare_at_price | money }}</span>
+            {%- endif -%}
+            <span class="sale-price-current">{{ product.price | money }}</span>
+          </div>
+          <ul class="sale-hero__benefits-mini">
+            <li>✅ Ergonomisches Design gegen Plattkopf</li>
+            <li>✅ Premium Memory-Foam, OEKO-TEX zertifiziert</li>
+            <li>✅ Für Babys 0-12 Monate</li>
+            <li>✅ 14 Tage Geld-zurück-Garantie</li>
+          </ul>
+          {%- form 'product', product -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="sale-cta-btn sale-cta-btn--primary sale-cta-btn--large" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}
+                🛒 JETZT BESTELLEN — {{ product.price | money }}
+              {%- else -%}
+                Ausverkauft
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+          <div class="sale-hero__trust-strip" style="margin-top:16px">
+            <div class="sale-trust-item"><span>🚚</span> Versand ab 100€ frei</div>
+            <div class="sale-trust-item"><span>🔒</span> Sichere Bezahlung</div>
+            <div class="sale-trust-item"><span>🛡️</span> Zufriedenheitsgarantie</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ===== STICKY MOBILE CTA ===== {%- endcomment -%}
+  <div class="sale-sticky-cta">
+    <div class="sale-sticky-cta__inner">
+      <div class="sale-sticky-cta__left">
+        <span class="sale-price-current" style="font-size:1.3rem">{{ product.price | money }}</span>
+        <span class="sale-stars" style="font-size:0.75rem">★★★★★</span>
+      </div>
+      <a href="#sale-order" class="sale-cta-btn sale-cta-btn--primary">🛒 Jetzt bestellen</a>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .sale-landing { --sale-green: #2d8b4e; --sale-red: #d9534f; --sale-gold: #D4A574; --sale-cream: #faf7f4; }
+
+  /* Urgency bar */
+  .sale-urgency-bar { background: var(--sale-red); color: #fff; padding: 10px 0; text-align: center; font-size: 0.9rem; letter-spacing: 0.3px; position: sticky; top: 0; z-index: 100; }
+  .sale-urgency-bar .container { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .sale-countdown { font-family: monospace; font-size: 1.2rem; font-weight: 800; background: rgba(0,0,0,0.2); padding: 2px 10px; border-radius: 4px; min-width: 85px; text-align: center; }
+
+  /* Section label */
+  .sale-section-label { display: block; text-align: center; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; color: var(--sale-gold); margin-bottom: 8px; }
+
+  /* Hero */
+  .sale-hero { padding: 40px 0; background: #fff; }
+  .sale-hero__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .sale-hero__main-image { border-radius: 16px; overflow: hidden; background: var(--sale-cream); aspect-ratio: 1; }
+  .sale-hero__main-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sale-hero__thumbs { display: flex; gap: 8px; margin-top: 12px; }
+  .sale-hero__thumb { width: 68px; height: 68px; border-radius: 10px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: var(--transition); }
+  .sale-hero__thumb.active, .sale-hero__thumb:hover { border-color: var(--sale-gold); }
+  .sale-hero__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .sale-hero__title { font-family: var(--font-heading); font-size: 1.7rem; line-height: 1.3; color: var(--color-text); margin: 12px 0; }
+
+  /* Rating */
+  .sale-hero__rating { font-size: 0.9rem; color: #666; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .sale-stars { color: #f5a623; letter-spacing: 1px; }
+  .sale-stars--large { font-size: 1.5rem; }
+  .sale-rating-sep { color: #ddd; }
+  .sale-reviews-link { text-decoration: underline; cursor: pointer; }
+  .sale-sold-count { color: var(--sale-green); font-weight: 600; }
+
+  /* Badges */
+  .sale-badges-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sale-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+  .sale-badge--hot { background: #fff3cd; color: #856404; }
+  .sale-badge--limited { background: #fde8e8; color: var(--sale-red); }
+  .sale-badge--save { background: var(--sale-green); color: #fff; }
+
+  /* Pricing */
+  .sale-hero__price { margin: 12px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .sale-price-old { font-size: 1.1rem; color: #999; text-decoration: line-through; }
+  .sale-price-current { font-size: 2.2rem; font-weight: 800; color: var(--color-text); }
+
+  /* Stock indicator */
+  .sale-stock-indicator { margin: 16px 0; padding: 16px; background: #fff8f0; border: 1px solid #ffe0b2; border-radius: 12px; }
+  .sale-stock-bar { height: 6px; background: #f0e6dc; border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+  .sale-stock-bar__fill { height: 100%; background: linear-gradient(90deg, var(--sale-red), #ff8a65); border-radius: 3px; transition: width 1s ease; }
+  .sale-stock-text { font-size: 0.85rem; margin: 0; color: var(--color-text); }
+  .sale-stock-viewers { color: #999; font-size: 0.8rem; }
+
+  /* Benefits mini */
+  .sale-hero__benefits-mini { list-style: none; padding: 0; margin: 16px 0; }
+  .sale-hero__benefits-mini li { padding: 5px 0; font-size: 0.92rem; color: var(--color-text); line-height: 1.5; }
+
+  /* Variants */
+  .sale-variants { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .sale-variant-option { padding: 10px 20px; border: 2px solid #e0d5c8; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: var(--transition); }
+  .sale-variant-option.active, .sale-variant-option:hover { border-color: var(--sale-gold); background: var(--color-primary); }
+  .sale-variant-option input { display: none; }
+
+  /* CTA Button */
+  .sale-cta-btn { display: inline-block; padding: 18px 32px; border-radius: 12px; font-size: 1.15rem; font-weight: 800; text-align: center; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease; width: 100%; letter-spacing: 0.5px; }
+  .sale-cta-btn--primary { background: var(--sale-green); color: #fff; box-shadow: 0 4px 20px rgba(45,139,78,0.35); }
+  .sale-cta-btn--primary:hover { background: #246f3e; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,139,78,0.45); }
+  .sale-cta-btn--large { font-size: 1.3rem; padding: 22px 40px; }
+  .sale-cta-btn:disabled { opacity: 0.5; cursor: not-allowed; animation: none; }
+  @keyframes pulseSale { 0%,100% { box-shadow: 0 4px 20px rgba(45,139,78,0.35); } 50% { box-shadow: 0 4px 32px rgba(45,139,78,0.6); } }
+  .sale-cta-btn--primary:not(:disabled) { animation: pulseSale 2s infinite; }
+
+  /* Payment icons */
+  .sale-payment-icons { font-size: 0.82rem; color: #999; margin-top: 10px; }
+
+  /* Trust strip */
+  .sale-hero__trust-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+  .sale-trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: #555; padding: 6px 0; }
+
+  /* Problem section */
+  .sale-problem { padding: 72px 0; background: var(--color-primary); }
+  .sale-problem__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .sale-problem__card { background: #fff; padding: 32px 24px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
+  .sale-problem__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .sale-problem__card--highlight { border: 2px solid var(--sale-red); box-shadow: 0 4px 20px rgba(217,83,79,0.15); }
+  .sale-problem__icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .sale-problem__card h3 { font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 12px; }
+  .sale-problem__card p { font-size: 0.92rem; color: #555; line-height: 1.65; }
+
+  /* Section titles */
+  .sale-section-title { font-family: var(--font-heading); font-size: 2rem; text-align: center; margin-bottom: 8px; color: var(--color-text); line-height: 1.3; }
+  .sale-section-subtitle { text-align: center; color: #555; font-size: 1.05rem; margin-bottom: 8px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+  /* Benefits */
+  .sale-benefits { padding: 72px 0; background: #fff; }
+  .sale-benefits__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .sale-benefit { text-align: center; padding: 28px 20px; border-radius: 16px; background: var(--sale-cream); transition: var(--transition); }
+  .sale-benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .sale-benefit__icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .sale-benefit h3 { font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 8px; }
+  .sale-benefit p { font-size: 0.88rem; color: #555; line-height: 1.6; }
+
+  /* How it works */
+  .sale-how { padding: 72px 0; background: var(--sale-cream); }
+  .sale-how__steps { display: flex; align-items: flex-start; justify-content: center; gap: 16px; margin-top: 40px; }
+  .sale-how__step { text-align: center; padding: 28px 20px; flex: 1; max-width: 280px; }
+  .sale-how__number { width: 56px; height: 56px; border-radius: 50%; background: var(--color-secondary); color: #fff; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .sale-how__step h3 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; }
+  .sale-how__step p { font-size: 0.88rem; color: #555; line-height: 1.6; }
+  .sale-how__connector { font-size: 2rem; color: var(--sale-gold); padding-top: 40px; font-weight: 300; }
+
+  /* Reviews */
+  .sale-reviews { padding: 72px 0; background: #fff; }
+  .sale-reviews__summary { display: flex; gap: 40px; align-items: center; justify-content: center; margin: 32px auto; max-width: 600px; padding: 24px; background: var(--sale-cream); border-radius: 16px; }
+  .sale-reviews__score { text-align: center; min-width: 120px; }
+  .sale-reviews__big-num { display: block; font-size: 3rem; font-weight: 800; color: var(--color-text); line-height: 1; }
+  .sale-reviews__score > span:last-child { font-size: 0.75rem; color: #999; }
+  .sale-reviews__bars { flex: 1; }
+  .sale-bar-row { display: flex; align-items: center; gap: 8px; margin: 3px 0; font-size: 0.75rem; color: #999; }
+  .sale-bar { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+  .sale-bar__fill { height: 100%; background: #f5a623; border-radius: 4px; }
+  .sale-reviews__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 24px; }
+  .sale-review-card { background: var(--sale-cream); padding: 24px; border-radius: 16px; border-left: 4px solid var(--sale-gold); }
+  .sale-review-card__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .sale-review-card__verified { font-size: 0.75rem; color: var(--sale-green); font-weight: 600; }
+  .sale-review-card h4 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 8px; color: var(--color-text); }
+  .sale-review-card p { font-size: 0.88rem; line-height: 1.65; color: #555; font-style: italic; margin-bottom: 12px; }
+  .sale-review-card__author { font-size: 0.82rem; color: #666; }
+  .sale-review-card__author strong { color: var(--color-text); }
+
+  /* Mid CTA */
+  .sale-mid-cta { padding: 72px 0; background: linear-gradient(135deg, var(--color-secondary) 0%, var(--sale-gold) 100%); }
+  .sale-mid-cta__inner { text-align: center; max-width: 600px; margin: 0 auto; }
+  .sale-mid-cta__badge { display: inline-block; background: rgba(255,255,255,0.2); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; }
+  .sale-mid-cta__inner h2 { color: #fff; font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 8px; line-height: 1.3; }
+  .sale-mid-cta__inner > p { color: rgba(255,255,255,0.9); margin-bottom: 24px; font-size: 1.05rem; }
+  .sale-mid-cta .sale-cta-btn { max-width: 420px; margin: 0 auto; display: block; }
+  .sale-mid-cta__guarantee { color: rgba(255,255,255,0.9); font-size: 0.88rem; margin-top: 16px; font-weight: 600; }
+
+  /* Guarantee */
+  .sale-guarantee { padding: 64px 0; background: #f0fdf4; border-top: 3px solid var(--sale-green); border-bottom: 3px solid var(--sale-green); }
+  .sale-guarantee__inner { display: flex; gap: 32px; align-items: center; max-width: 750px; margin: 0 auto; }
+  .sale-guarantee__icon { font-size: 4rem; flex-shrink: 0; }
+  .sale-guarantee__content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 12px; color: var(--sale-green); }
+  .sale-guarantee__content p { font-size: 0.95rem; line-height: 1.7; color: #333; margin-bottom: 16px; }
+  .sale-guarantee__badges { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600; color: var(--sale-green); }
+
+  /* Gallery */
+  .sale-gallery { padding: 64px 0; background: var(--sale-cream); }
+  .sale-gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+  .sale-gallery__item { border-radius: 12px; overflow: hidden; aspect-ratio: 1; }
+  .sale-gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .sale-gallery__item:hover img { transform: scale(1.05); }
+
+  /* FAQ */
+  .sale-faq { padding: 72px 0; background: #fff; }
+  .sale-faq__list { max-width: 700px; margin: 32px auto 0; }
+  .sale-faq__item { border-bottom: 1px solid #e8e0d8; }
+  .sale-faq__item summary { padding: 20px 0; font-weight: 600; font-size: 1rem; cursor: pointer; color: var(--color-text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .sale-faq__item summary::after { content: '+'; font-size: 1.5rem; color: var(--sale-gold); transition: var(--transition); font-weight: 300; }
+  .sale-faq__item[open] summary::after { content: '−'; }
+  .sale-faq__item summary::-webkit-details-marker { display: none; }
+  .sale-faq__item p { padding: 0 0 20px; font-size: 0.92rem; line-height: 1.7; color: #555; }
+
+  /* Final CTA */
+  .sale-final-cta { padding: 72px 0; background: var(--color-primary); }
+  .sale-final-cta__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 900px; margin: 0 auto; }
+  .sale-final-cta__product { border-radius: 16px; overflow: hidden; }
+  .sale-final-cta__product img { width: 100%; height: auto; display: block; }
+  .sale-final-cta__content h2 { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 4px; }
+
+  /* Sticky mobile CTA */
+  .sale-sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #fff; padding: 10px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.12); z-index: 999; }
+  .sale-sticky-cta__inner { display: flex; align-items: center; gap: 12px; max-width: 500px; margin: 0 auto; }
+  .sale-sticky-cta__left { flex-shrink: 0; text-align: center; }
+  .sale-sticky-cta .sale-cta-btn { padding: 14px 20px; font-size: 1rem; animation: none; flex: 1; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .sale-hero__inner { grid-template-columns: 1fr; gap: 24px; }
+    .sale-hero__title { font-size: 1.4rem; }
+    .sale-price-current { font-size: 1.8rem; }
+    .sale-problem__grid { grid-template-columns: 1fr; gap: 16px; }
+    .sale-benefits__grid { grid-template-columns: 1fr; gap: 12px; }
+    .sale-how__steps { flex-direction: column; align-items: center; }
+    .sale-how__connector { transform: rotate(90deg); padding: 0; }
+    .sale-reviews__summary { flex-direction: column; gap: 16px; }
+    .sale-reviews__grid { grid-template-columns: 1fr; }
+    .sale-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+    .sale-guarantee__inner { flex-direction: column; text-align: center; }
+    .sale-guarantee__badges { justify-content: center; }
+    .sale-final-cta__inner { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+    .sale-section-title { font-size: 1.5rem; }
+    .sale-mid-cta__inner h2 { font-size: 1.3rem; }
+    .sale-sticky-cta { display: block; }
+    .sale-final-cta { padding-bottom: 100px; }
+    .mobile-bottom-nav { display: none !important; }
+    .sale-hero__trust-strip { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<script>
+  /* Countdown Timer — daily reset at midnight */
+  (function() {
+    var el = document.getElementById('sale-countdown');
+    if (!el) return;
+    function update() {
+      var now = new Date();
+      var end = new Date(now);
+      end.setHours(23,59,59,999);
+      var diff = end - now;
+      if (diff <= 0) { el.textContent = '00:00:00'; return; }
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      el.textContent = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+
+  /* Thumbnail gallery */
+  document.querySelectorAll('.sale-hero__thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      var main = document.querySelector('#sale-main-img img');
+      if (main && this.dataset.full) {
+        main.src = this.dataset.full;
+      }
+      document.querySelectorAll('.sale-hero__thumb').forEach(function(t) { t.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+
+  /* Variant selection */
+  document.querySelectorAll('.sale-variant-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.sale-variant-option').forEach(function(o) { o.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+
+  /* Random viewers count fluctuation */
+  (function() {
+    var viewerEl = document.querySelector('.sale-stock-viewers');
+    if (!viewerEl) return;
+    setInterval(function() {
+      var base = {{ section.settings.viewers_count }};
+      var rand = base + Math.floor(Math.random() * 5) - 2;
+      if (rand < 1) rand = base;
+      viewerEl.textContent = rand + ' Personen sehen sich dieses Produkt gerade an';
+    }, 8000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sale Landing Page",
+  "class": "sale-landing-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "reviews_count",
+      "min": 50,
+      "max": 5000,
+      "step": 50,
+      "label": "Anzahl Bewertungen",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "sold_count",
+      "min": 100,
+      "max": 10000,
+      "step": 100,
+      "label": "Anzahl verkauft",
+      "default": 2400
+    },
+    {
+      "type": "range",
+      "id": "viewers_count",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "label": "Aktuelle Besucher",
+      "default": 14
+    }
+  ]
+}
+{% endschema %}
