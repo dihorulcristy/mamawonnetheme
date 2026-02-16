@@ -12,6 +12,57 @@
         "social_tiktok": "",
         "cart_type": "drawer",
         "cart_show_free_shipping_bar": true,
-        "cart_free_shipping_threshold": "50"
+        "cart_free_shipping_threshold": "100",
+        "sections": {
+            "announcement-bar": {
+                "type": "announcement-bar",
+                "settings": {
+                    "text": "🚚 Kostenloser Versand ab 100€ | 14 Tage Rückgaberecht | 🇩🇪 Made with Love",
+                    "bg_color": "#8B7355"
+                }
+            },
+            "header": {
+                "type": "header",
+                "settings": {
+                    "logo_height": 56,
+                    "menu": "main-menu"
+                }
+            },
+            "footer": {
+                "type": "footer",
+                "settings": {
+                    "description": "Sichere und ergonomische Anti-Reflux Produkte für ruhigen Babyschlaf. Von Eltern entwickelt, von Kinderärzten empfohlen."
+                },
+                "blocks": {
+                    "col_1": {
+                        "type": "link_column",
+                        "settings": {
+                            "heading": "Shop"
+                        }
+                    },
+                    "col_2": {
+                        "type": "link_column",
+                        "settings": {
+                            "heading": "Service"
+                        }
+                    },
+                    "col_3": {
+                        "type": "link_column",
+                        "settings": {
+                            "heading": "Rechtliches"
+                        }
+                    }
+                },
+                "block_order": [
+                    "col_1",
+                    "col_2",
+                    "col_3"
+                ]
+            },
+            "cart-drawer": {
+                "type": "cart-drawer",
+                "settings": {}
+            }
+        }
     }
 }
