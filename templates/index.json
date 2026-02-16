@@ -46,14 +46,14 @@
                     "type": "trust_item",
                     "settings": {
                         "icon": "🚚",
-                        "text": "Kostenloser Versand ab 50€"
+                        "text": "Kostenloser Versand ab 100€"
                     }
                 },
                 "tb_2": {
                     "type": "trust_item",
                     "settings": {
                         "icon": "↩️",
-                        "text": "30 Tage Rückgaberecht"
+                        "text": "14 Tage Rückgaberecht"
                     }
                 },
                 "tb_3": {
