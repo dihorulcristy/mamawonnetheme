@@ -55,13 +55,13 @@
         "type": "text",
         "id": "social_instagram",
         "label": "Instagram URL",
-        "default": "https://instagram.com/mamawonne"
+        "default": "https://www.instagram.com/mamawonne.de/"
       },
       {
         "type": "text",
         "id": "social_facebook",
         "label": "Facebook URL",
-        "default": "https://facebook.com/mamawonne"
+        "default": "https://www.facebook.com/profile.php?id=61579342877056"
       },
       {
         "type": "text",
@@ -95,8 +95,14 @@
         "id": "cart_type",
         "label": "Warenkorb-Typ",
         "options": [
-          { "value": "drawer", "label": "Seitliche Schublade" },
-          { "value": "page", "label": "Warenkorbseite" }
+          {
+            "value": "drawer",
+            "label": "Seitliche Schublade"
+          },
+          {
+            "value": "page",
+            "label": "Warenkorbseite"
+          }
         ],
         "default": "drawer"
       },

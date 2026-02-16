@@ -35,7 +35,13 @@
             loading="eager"
           >
         {%- else -%}
-          <span class="header__logo-text">{{ shop.name }}</span>
+          <img
+            src="{{ 'logo.png' | asset_url }}"
+            alt="{{ shop.name }}"
+            height="56"
+            width="auto"
+            loading="eager"
+          >
         {%- endif -%}
       </a>
 
