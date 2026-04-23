@@ -21,19 +21,21 @@
       </div>
     </div>
 
-    <div class="product-grid">
-      {%- for product in collection.products -%}
-        {% render 'product-card', product: product %}
-      {%- else -%}
-        <p>{{ 'collections.no_products' | t }}</p>
-      {%- endfor -%}
-    </div>
-
-    {%- if paginate.pages > 1 -%}
-      <div style="text-align:center;margin-top:40px">
-        {{ paginate | default_pagination }}
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p>{{ 'collections.no_products' | t }}</p>
+        {%- endfor -%}
       </div>
-    {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <div style="text-align:center;margin-top:40px">
+          {{ paginate | default_pagination }}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
   </div>
 </section>
 

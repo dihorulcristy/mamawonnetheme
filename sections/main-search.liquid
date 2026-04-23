@@ -2,7 +2,7 @@
 <section class="search-page">
   <div class="container">
     <h1 class="section-heading" style="margin-bottom:32px"><span>{{ 'search.title' | t }}</span></h1>
-    <form action="/search" method="get" class="search-form">
+    <form action="{{ routes.search_url }}" method="get" class="search-form">
       <input type="text" name="q" class="search-form__input" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="Suche">
       <button type="submit" class="btn btn--primary">{{ 'search.title' | t }}</button>
     </form>

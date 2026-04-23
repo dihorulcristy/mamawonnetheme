@@ -35,7 +35,7 @@
     {%- if cart.item_count == 0 -%}
       <div class="cart-drawer__empty">
         <p>{{ 'cart.empty' | t }}</p>
-        <a href="/collections/all" class="btn btn--primary" style="margin-top:20px">{{ 'cart.continue_shopping' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary" style="margin-top:20px">{{ 'cart.continue_shopping' | t }}</a>
       </div>
     {%- else -%}
       {%- for item in cart.items -%}
@@ -58,7 +58,7 @@
               <span class="cart-item__qty-value">{{ item.quantity }}</span>
               <button class="cart-item__qty-btn" data-qty-plus aria-label="Mehr">+</button>
             </div>
-            <a href="/cart/change?id={{ item.key }}&quantity=0" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
+            <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity=0" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
           </div>
         </div>
       {%- endfor -%}

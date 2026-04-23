@@ -25,21 +25,16 @@
       </button>
 
       {%- comment -%} Logo {%- endcomment -%}
-      <a href="/" class="header__logo" aria-label="{{ shop.name }}">
+      <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
         {%- if section.settings.logo != blank -%}
-          <img
-            src="{{ section.settings.logo | image_url: height: 112 }}"
-            alt="{{ shop.name }}"
-            height="56"
-            width="auto"
-            loading="eager"
-          >
+          {%- assign logo_height = section.settings.logo_height -%}
+          {{ section.settings.logo | image_url: height: 112 | image_tag: height: logo_height, width: 'auto', loading: 'eager', alt: shop.name }}
         {%- else -%}
           <img
             src="{{ 'logo.png' | asset_url }}"
             alt="{{ shop.name }}"
             height="56"
-            width="auto"
+            width="180"
             loading="eager"
           >
         {%- endif -%}
@@ -60,10 +55,10 @@
 
       {%- comment -%} Header Icons {%- endcomment -%}
       <div class="header__icons">
-        <a href="/search" class="header__icon" aria-label="Suchen">
+        <a href="{{ routes.search_url }}" class="header__icon" aria-label="Suchen">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
         </a>
-        <a href="/account" class="header__icon" aria-label="Konto">
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="Konto">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-7 7-7s7 3 7 7"/></svg>
         </a>
         <button class="header__icon" data-cart-toggle aria-label="Warenkorb">

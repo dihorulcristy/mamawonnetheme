@@ -15,7 +15,7 @@
         </div>
         <button type="submit" class="btn btn--primary btn--full" style="margin-bottom:16px">{{ 'customer.login.sign_in' | t }}</button>
         <p style="text-align:center;font-size:0.88rem">
-          <a href="/account/register" style="color:var(--color-accent)">{{ 'customer.login.create_account' | t }}</a> ·
+          <a href="{{ routes.account_register_url }}" style="color:var(--color-accent)">{{ 'customer.login.create_account' | t }}</a> ·
           <a href="#recover">{{ 'customer.login.forgot_password' | t }}</a>
         </p>
       {% endform %}

@@ -6,7 +6,7 @@
       {%- comment -%} Brand Column {%- endcomment -%}
       <div class="footer__brand">
         {%- if section.settings.logo != blank -%}
-          <img class="footer__logo" src="{{ section.settings.logo | image_url: height: 96 }}" alt="{{ shop.name }}" loading="lazy">
+          {{ section.settings.logo | image_url: height: 96 | image_tag: class: 'footer__logo', height: 48, width: 'auto', loading: 'lazy', alt: shop.name }}
         {%- else -%}
           <div class="footer__logo" style="font-family:var(--font-heading);font-size:1.4rem;font-weight:700;color:#fff">{{ shop.name }}</div>
         {%- endif -%}
