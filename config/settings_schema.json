@@ -66,14 +66,12 @@
       {
         "type": "text",
         "id": "social_pinterest",
-        "label": "Pinterest URL",
-        "default": ""
+        "label": "Pinterest URL"
       },
       {
         "type": "text",
         "id": "social_tiktok",
-        "label": "TikTok URL",
-        "default": ""
+        "label": "TikTok URL"
       }
     ]
   },
