@@ -46,18 +46,10 @@
               "heading": "Shop",
               "menu": "footer"
             }
-          },
-          "col_2": {
-            "type": "link_column",
-            "settings": {
-              "heading": "",
-              "menu": ""
-            }
           }
         },
         "block_order": [
-          "col_1",
-          "col_2"
+          "col_1"
         ],
         "settings": {
           "description": "Sichere und ergonomische Anti-Reflux Produkte für ruhigen Babyschlaf. Von Eltern entwickelt, von Kinderärzten empfohlen."
