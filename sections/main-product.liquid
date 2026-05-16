@@ -3,7 +3,7 @@
 <section class="product-page">
   <div class="container">
     <nav class="product-breadcrumbs" aria-label="Brotkrümel">
-      <a href="/">Startseite</a>
+      <a href="{{ routes.root_url }}">Startseite</a>
       <span>/</span>
       {%- if product.collections.size > 0 -%}
         <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>

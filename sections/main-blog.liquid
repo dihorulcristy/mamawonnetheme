@@ -2,6 +2,7 @@
 <section class="blog-page">
   <div class="container">
     <h1 class="section-heading"><span style="display:inline-block;position:relative;padding-bottom:16px">{{ blog.title }}</span></h1>
+    {% paginate blog.articles by 12 %}
     <div class="blog-grid">
       {%- for article in blog.articles -%}
         <article class="blog-card">
@@ -21,6 +22,7 @@
     {%- if paginate.pages > 1 -%}
       <div style="text-align:center;margin-top:40px">{{ paginate | default_pagination }}</div>
     {%- endif -%}
+    {% endpaginate %}
   </div>
 </section>
 
