@@ -115,11 +115,20 @@
     thumb.addEventListener('click', () => {
       const gallery = thumb.closest('.product-gallery');
       const mainImg = gallery.querySelector('.product-gallery__main img');
-      const src = thumb.querySelector('img').src;
+      const newSrc = thumb.getAttribute('data-src');
+      const newSrcset = thumb.getAttribute('data-srcset');
 
       gallery.querySelectorAll('.product-gallery__thumb').forEach(t => t.classList.remove('is-active'));
       thumb.classList.add('is-active');
-      mainImg.src = src;
+      
+      if (newSrcset) {
+        mainImg.srcset = newSrcset;
+      } else {
+        mainImg.removeAttribute('srcset');
+      }
+      if (newSrc) {
+        mainImg.src = newSrc;
+      }
     });
   });
 
