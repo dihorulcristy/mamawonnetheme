@@ -112,6 +112,44 @@
     });
   }
 
+  async function refreshCartPage() {
+    // Re-fetch the cart section HTML and replace just the items + summary
+    const response = await fetch('/cart?section_id=main-cart');
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    const newItems = doc.getElementById('CartItems');
+    const oldItems = document.getElementById('CartItems');
+    if (newItems && oldItems) {
+      oldItems.innerHTML = newItems.innerHTML;
+    }
+
+    const newSummary = doc.getElementById('CartSummary');
+    const oldSummary = document.getElementById('CartSummary');
+    if (newSummary && oldSummary) {
+      oldSummary.innerHTML = newSummary.innerHTML;
+    }
+
+    // Show empty state if cart is now empty
+    const cart = await fetch('/cart.js').then(r => r.json());
+    if (cart.item_count === 0) {
+      const layout = document.querySelector('.cart-page__layout');
+      if (layout) {
+        layout.innerHTML = '<div class="cart-page__empty"><p>Dein Warenkorb ist leer.</p><a href="/collections/all" class="btn btn--primary" style="margin-top:20px">Weiter einkaufen</a></div>';
+      }
+    }
+
+    document.querySelectorAll('.header__cart-count').forEach(el => {
+      el.textContent = cart.item_count;
+      el.style.display = cart.item_count > 0 ? '' : 'none';
+    });
+
+    bindCartEvents();
+  }
+
+  const isCartPage = document.getElementById('CartPage');
+
   function bindCartEvents() {
     // Qty minus
     document.querySelectorAll('[data-cart-qty-minus]').forEach(btn => {
@@ -121,7 +159,11 @@
         const newQty = Math.max(0, current - 1);
         btn.disabled = true;
         await cartChange(key, newQty);
-        await refreshCartDrawer();
+        if (isCartPage) {
+          await refreshCartPage();
+        } else {
+          await refreshCartDrawer();
+        }
       });
     });
 
@@ -132,7 +174,11 @@
         const current = parseInt(btn.getAttribute('data-qty')) || 1;
         btn.disabled = true;
         await cartChange(key, current + 1);
-        await refreshCartDrawer();
+        if (isCartPage) {
+          await refreshCartPage();
+        } else {
+          await refreshCartDrawer();
+        }
       });
     });
 
@@ -142,7 +188,11 @@
         const key = btn.getAttribute('data-key');
         btn.disabled = true;
         await cartChange(key, 0);
-        await refreshCartDrawer();
+        if (isCartPage) {
+          await refreshCartPage();
+        } else {
+          await refreshCartDrawer();
+        }
       });
     });
   }
