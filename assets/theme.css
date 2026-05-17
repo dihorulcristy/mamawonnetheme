@@ -285,7 +285,10 @@ p{margin-bottom:1rem}
 .product-trust-badges{display:flex;flex-wrap:wrap;gap:16px;padding:16px 0;border-top:1px solid var(--color-primary);border-bottom:1px solid var(--color-primary);font-size:.8rem;color:#777}
 .product-trust-badges__item{display:flex;align-items:center;gap:6px}
 .product-accordion{border-top:1px solid var(--color-primary)}
-.product-accordion--bottom{margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto}
+.product-details-bottom{margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto}
+.product-details-bottom__block{margin-bottom:32px}
+.product-details-bottom__title{font-size:1.25rem;margin-bottom:16px;border-bottom:1px solid var(--color-primary);padding-bottom:8px}
+.product-details-bottom__content{font-size:.95rem;color:#666;line-height:1.7}
 .product-accordion__item{border-bottom:1px solid var(--color-primary)}
 .product-accordion__trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:.95rem;color:var(--color-text);text-align:left;cursor:pointer}
 .product-accordion__content{max-height:0;overflow:hidden;transition:max-height .35s ease}
