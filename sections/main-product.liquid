@@ -15,7 +15,7 @@
     <div class="product-page__inner">
       {%- comment -%} Gallery {%- endcomment -%}
       <div class="product-gallery">
-        <div class="product-gallery__main">
+        <div class="product-gallery__main" data-lightbox-trigger>
           {%- if product.featured_image != blank -%}
             {{ product.featured_image | image_url: width: 1500 | image_tag: 
               loading: 'eager', 
@@ -132,6 +132,25 @@
       {%- endfor -%}
     </div>
   </div>
+
+  {%- comment -%} Product Lightbox Dialog {%- endcomment -%}
+  <dialog class="product-lightbox" id="ProductLightbox">
+    <button class="product-lightbox__close" aria-label="Schließen" formmethod="dialog">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="product-lightbox__slider">
+      {%- for image in product.images -%}
+        <div class="product-lightbox__slide" data-index="{{ forloop.index0 }}">
+          {{ image | image_url: width: 2000 | image_tag: 
+            loading: 'lazy', 
+            sizes: '100vw', 
+            widths: '800, 1000, 1500, 2000',
+            alt: image.alt | escape
+          }}
+        </div>
+      {%- endfor -%}
+    </div>
+  </dialog>
 </section>
 
 {% schema %}

@@ -293,6 +293,14 @@ p{margin-bottom:1rem}
 .product-accordion__trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:.95rem;color:var(--color-text);text-align:left;cursor:pointer}
 .product-accordion__content{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .product-accordion__content-inner{padding-bottom:20px;font-size:.92rem;color:#666;line-height:1.7}
+.product-lightbox{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;background:rgba(0,0,0,0.95);z-index:9999;border:none;padding:0;margin:0;overflow:hidden}
+.product-lightbox::backdrop{background:rgba(0,0,0,0.95)}
+.product-lightbox__close{position:absolute;top:20px;right:20px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,0.1);border-radius:50%;z-index:10000;transition:background var(--transition)}
+.product-lightbox__close:hover{background:rgba(255,255,255,0.2)}
+.product-lightbox__slider{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.product-lightbox__slider::-webkit-scrollbar{display:none}
+.product-lightbox__slide{flex:0 0 100vw;width:100vw;height:100%;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;padding:20px}
+.product-lightbox__slide img{max-width:100%;max-height:100%;object-fit:contain}
 .related-products{padding-top:60px;border-top:1px solid var(--color-primary)}
 
 /* ---------- Collection, Cart, Blog, Search, 404 ---------- */

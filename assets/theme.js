@@ -128,9 +128,57 @@
       }
       if (newSrc) {
         mainImg.src = newSrc;
+        mainImg.setAttribute('data-index', thumb.getAttribute('data-index'));
       }
     });
   });
+
+  // ---- Product Lightbox (Mobile swipe gallery) ----
+  const lightbox = document.getElementById('ProductLightbox');
+  const lightboxTrigger = document.querySelector('[data-lightbox-trigger]');
+  const lightboxClose = document.querySelector('.product-lightbox__close');
+  
+  if (lightbox && lightboxTrigger) {
+    // Add data-index to thumbs if not present
+    document.querySelectorAll('.product-gallery__thumb').forEach((t, i) => t.setAttribute('data-index', i));
+    const mainImg = lightboxTrigger.querySelector('img');
+    if (mainImg && !mainImg.hasAttribute('data-index')) mainImg.setAttribute('data-index', 0);
+
+    lightboxTrigger.addEventListener('click', () => {
+      // Only enable on mobile/tablet (optional, but usually click-to-zoom is fine on desktop too)
+      lightbox.showModal();
+      document.body.style.overflow = 'hidden';
+      
+      // Scroll to the active image
+      const activeIndex = mainImg ? parseInt(mainImg.getAttribute('data-index') || 0) : 0;
+      const slider = lightbox.querySelector('.product-lightbox__slider');
+      const activeSlide = lightbox.querySelectorAll('.product-lightbox__slide')[activeIndex];
+      if (slider && activeSlide) {
+        // Small timeout to allow dialog to render before scrolling
+        setTimeout(() => {
+          slider.scrollTo({ left: activeSlide.offsetLeft, behavior: 'auto' });
+        }, 10);
+      }
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', () => {
+        lightbox.close();
+        document.body.style.overflow = '';
+      });
+    }
+
+    lightbox.addEventListener('close', () => {
+      document.body.style.overflow = '';
+    });
+    
+    // Close on backdrop click
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.close();
+      }
+    });
+  }
 
   // ---- Quantity Selectors ----
   document.querySelectorAll('.quantity-selector').forEach(selector => {
