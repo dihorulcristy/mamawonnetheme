@@ -338,4 +338,39 @@
     }
   });
 
+
+  // ---- Sticky Add to Cart ----
+  const mainAddToCartBtn = document.querySelector('.product-info__add-to-cart');
+  const stickyCart = document.getElementById('StickyCart');
+  const stickyCartBtn = document.getElementById('StickyCartBtn');
+  
+  if (mainAddToCartBtn && stickyCart && stickyCartBtn) {
+    if ('IntersectionObserver' in window) {
+      const stickyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            stickyCart.classList.add('is-visible');
+          } else {
+            stickyCart.classList.remove('is-visible');
+          }
+        });
+      }, { rootMargin: '0px' });
+
+      stickyObserver.observe(mainAddToCartBtn);
+    }
+
+    // Sync sticky button with main form button (text + state)
+    const syncStickyBtn = () => {
+      stickyCartBtn.disabled = mainAddToCartBtn.disabled;
+      stickyCartBtn.textContent = mainAddToCartBtn.textContent.trim();
+    };
+    syncStickyBtn();
+    new MutationObserver(syncStickyBtn).observe(mainAddToCartBtn, { childList: true, attributes: true, subtree: true });
+
+    // Click triggers the main form submit
+    stickyCartBtn.addEventListener('click', () => {
+      mainAddToCartBtn.click();
+    });
+  }
+
 })();

@@ -171,6 +171,25 @@
       {%- endfor -%}
     </div>
   </dialog>
+
+  {%- comment -%} Sticky Add to Cart (Mobile) {%- endcomment -%}
+  <div class="sticky-cart d-md-none" id="StickyCart">
+    <div class="sticky-cart__inner">
+      <div class="sticky-cart__info">
+        <div class="sticky-cart__text">
+          <div class="sticky-cart__title">{{ product.title }}</div>
+          <div class="sticky-cart__price">{{ product.selected_or_first_available_variant.price | money }}</div>
+        </div>
+      </div>
+      <button type="button" class="btn btn--primary sticky-cart__btn" id="StickyCartBtn" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+        {%- if product.selected_or_first_available_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </button>
+    </div>
+  </div>
 </section>
 
 {% schema %}
