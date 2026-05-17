@@ -110,26 +110,46 @@
     });
   });
 
-  // ---- Product Gallery Thumbnails ----
+  // ---- Product Gallery Thumbnails & Slider ----
+  const gallerySlider = document.getElementById('ProductGallerySlider');
+  
+  if (gallerySlider) {
+    // Sync thumbnails on scroll
+    gallerySlider.addEventListener('scroll', () => {
+      const scrollLeft = gallerySlider.scrollLeft;
+      const slideWidth = gallerySlider.clientWidth;
+      const activeIndex = Math.round(scrollLeft / slideWidth);
+      
+      gallerySlider.setAttribute('data-active-index', activeIndex);
+      
+      document.querySelectorAll('.product-gallery__thumb').forEach((t, i) => {
+        t.classList.toggle('is-active', i === activeIndex);
+      });
+    }, { passive: true });
+  }
+
   document.querySelectorAll('.product-gallery__thumb').forEach(thumb => {
     thumb.addEventListener('click', () => {
       const gallery = thumb.closest('.product-gallery');
-      const mainImg = gallery.querySelector('.product-gallery__main img');
-      const newSrc = thumb.getAttribute('data-src');
-      const newSrcset = thumb.getAttribute('data-srcset');
+      const gSlider = gallery.querySelector('.product-gallery__slider');
+      const targetIndex = parseInt(thumb.getAttribute('data-index') || thumb.dataset.index || 0);
+      
+      // If we don't have data-index, fallback to index within parent
+      let finalIndex = targetIndex;
+      if (!thumb.hasAttribute('data-index')) {
+        const thumbs = Array.from(gallery.querySelectorAll('.product-gallery__thumb'));
+        finalIndex = thumbs.indexOf(thumb);
+      }
+      
+      if (gSlider) {
+        const targetSlide = gSlider.querySelectorAll('.product-gallery__slide')[finalIndex];
+        if (targetSlide) {
+          gSlider.scrollTo({ left: targetSlide.offsetLeft, behavior: 'smooth' });
+        }
+      }
 
       gallery.querySelectorAll('.product-gallery__thumb').forEach(t => t.classList.remove('is-active'));
       thumb.classList.add('is-active');
-      
-      if (newSrcset) {
-        mainImg.srcset = newSrcset;
-      } else {
-        mainImg.removeAttribute('srcset');
-      }
-      if (newSrc) {
-        mainImg.src = newSrc;
-        mainImg.setAttribute('data-index', thumb.getAttribute('data-index'));
-      }
     });
   });
 
@@ -141,18 +161,16 @@
   if (lightbox && lightboxTrigger) {
     // Add data-index to thumbs if not present
     document.querySelectorAll('.product-gallery__thumb').forEach((t, i) => t.setAttribute('data-index', i));
-    const mainImg = lightboxTrigger.querySelector('img');
-    if (mainImg && !mainImg.hasAttribute('data-index')) mainImg.setAttribute('data-index', 0);
 
     lightboxTrigger.addEventListener('click', () => {
-      // Only enable on mobile/tablet (optional, but usually click-to-zoom is fine on desktop too)
       lightbox.showModal();
       document.body.style.overflow = 'hidden';
       
       // Scroll to the active image
-      const activeIndex = mainImg ? parseInt(mainImg.getAttribute('data-index') || 0) : 0;
+      const activeIndex = gallerySlider ? parseInt(gallerySlider.getAttribute('data-active-index') || 0) : 0;
       const slider = lightbox.querySelector('.product-lightbox__slider');
       const activeSlide = lightbox.querySelectorAll('.product-lightbox__slide')[activeIndex];
+      
       if (slider && activeSlide) {
         // Small timeout to allow dialog to render before scrolling
         setTimeout(() => {
