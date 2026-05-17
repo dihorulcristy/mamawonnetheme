@@ -103,27 +103,28 @@
           <span class="product-trust-badges__item">🇩🇪 Made in Europe</span>
         </div>
 
-        {%- comment -%} Product Accordions {%- endcomment -%}
-        <div class="product-accordion">
-          {%- for block in section.blocks -%}
-            <div class="product-accordion__item" {{ block.shopify_attributes }}>
-              <button class="product-accordion__trigger" aria-expanded="false">
-                <span>{{ block.settings.title }}</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="product-accordion__content">
-                <div class="product-accordion__content-inner">
-                  {%- if block.type == 'description' -%}
-                    {{ product.description }}
-                  {%- else -%}
-                    {{ block.settings.content }}
-                  {%- endif -%}
-                </div>
-              </div>
-            </div>
-          {%- endfor -%}
-        </div>
       </div>
+    </div>
+
+    {%- comment -%} Product Accordions (Moved to bottom) {%- endcomment -%}
+    <div class="product-accordion product-accordion--bottom">
+      {%- for block in section.blocks -%}
+        <div class="product-accordion__item" {{ block.shopify_attributes }}>
+          <button class="product-accordion__trigger" aria-expanded="false">
+            <span>{{ block.settings.title }}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="product-accordion__content">
+            <div class="product-accordion__content-inner">
+              {%- if block.type == 'description' -%}
+                {{ product.description }}
+              {%- else -%}
+                {{ block.settings.content }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
