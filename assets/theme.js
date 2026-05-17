@@ -219,14 +219,86 @@
   });
 
   // ---- Variant Swatches ----
-  document.querySelectorAll('.product-variants__options').forEach(group => {
-    group.querySelectorAll('.variant-swatch').forEach(swatch => {
-      swatch.addEventListener('click', () => {
-        group.querySelectorAll('.variant-swatch').forEach(s => s.classList.remove('is-selected'));
-        swatch.classList.add('is-selected');
-      });
-    });
-  });
+  const productForm = document.querySelector('form[action*="/cart/add"]');
+  if (productForm) {
+    const jsonScript = document.querySelector('[id^="ProductJson-"]');
+    if (jsonScript) {
+      try {
+        const variants = JSON.parse(jsonScript.innerHTML);
+        const variantOptions = document.querySelectorAll('.product-variants__options');
+        const idInput = productForm.querySelector('input[name="id"]');
+        const addToCartBtn = productForm.querySelector('.product-info__add-to-cart');
+        const priceElement = document.querySelector('.product-info__price');
+        
+        variantOptions.forEach(group => {
+          group.querySelectorAll('.variant-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+              // Update UI
+              group.querySelectorAll('.variant-swatch').forEach(s => s.classList.remove('is-selected'));
+              swatch.classList.add('is-selected');
+
+              // Get selected options
+              let selectedOptions = {};
+              variantOptions.forEach(optGroup => {
+                const optName = optGroup.getAttribute('data-option'); // "option1", "option2"
+                const selectedSwatch = optGroup.querySelector('.variant-swatch.is-selected');
+                if (selectedSwatch) {
+                  selectedOptions[optName] = selectedSwatch.getAttribute('data-value');
+                }
+              });
+
+              // Find matching variant
+              const matchedVariant = variants.find(variant => {
+                return (!selectedOptions.option1 || variant.option1 === selectedOptions.option1) &&
+                       (!selectedOptions.option2 || variant.option2 === selectedOptions.option2) &&
+                       (!selectedOptions.option3 || variant.option3 === selectedOptions.option3);
+              });
+
+              if (matchedVariant) {
+                // Update hidden input
+                if (idInput) idInput.value = matchedVariant.id;
+
+                // Update URL
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('variant', matchedVariant.id);
+                window.history.replaceState({}, '', newUrl);
+
+                // Update Button
+                if (addToCartBtn) {
+                  if (matchedVariant.available) {
+                    addToCartBtn.disabled = false;
+                    addToCartBtn.textContent = 'In den Warenkorb';
+                  } else {
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.textContent = 'Ausverkauft';
+                  }
+                }
+                
+                // Update Price
+                if (priceElement) {
+                  let formattedPrice = (matchedVariant.price / 100).toFixed(2).replace('.', ',');
+                  let priceHTML = '€' + formattedPrice;
+                  if (matchedVariant.compare_at_price > matchedVariant.price) {
+                    let formattedCompare = (matchedVariant.compare_at_price / 100).toFixed(2).replace('.', ',');
+                    priceHTML += ' <span class="product-info__price--compare">€' + formattedCompare + '</span>';
+                  }
+                  priceElement.innerHTML = priceHTML;
+                }
+              } else {
+                // Variant does not exist
+                if (addToCartBtn) {
+                  addToCartBtn.disabled = true;
+                  addToCartBtn.textContent = 'Nicht verfügbar';
+                }
+              }
+            });
+          });
+        });
+      } catch (e) {
+        console.error('Error parsing product variants JSON', e);
+      }
+    }
+  }
 
   // ---- Lazy Loading Images ----
   if ('IntersectionObserver' in window) {

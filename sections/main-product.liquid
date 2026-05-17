@@ -94,15 +94,19 @@
               {%- for option in product.options_with_values -%}
                 <div>
                   <span class="product-variants__label">{{ option.name }}</span>
-                  <div class="product-variants__options">
+                  <div class="product-variants__options" data-option="option{{ option.position }}">
                     {%- for value in option.values -%}
-                      <button type="button" class="variant-swatch{% if forloop.first %} is-selected{% endif %}">{{ value }}</button>
+                      <button type="button" class="variant-swatch{% if option.selected_value == value %} is-selected{% endif %}" data-value="{{ value | escape }}">{{ value }}</button>
                     {%- endfor -%}
                   </div>
                 </div>
               {%- endfor -%}
             </div>
           {%- endunless -%}
+
+          <script type="application/json" id="ProductJson-{{ section.id }}">
+            {{ product.variants | json }}
+          </script>
 
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
