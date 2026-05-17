@@ -116,7 +116,7 @@
             <button type="button" class="quantity-selector__btn" data-qty-plus aria-label="Mehr">+</button>
           </div>
 
-          <button type="submit" class="product-info__add-to-cart btn btn--primary btn--full"
+          <button type="submit" name="add" class="product-info__add-to-cart btn btn--primary btn--full"
             {%- unless product.selected_or_first_available_variant.available %} disabled{% endunless -%}>
             {%- if product.selected_or_first_available_variant.available -%}
               {{ 'products.product.add_to_cart' | t }}
