@@ -39,7 +39,7 @@
       </div>
     {%- else -%}
       {%- for item in cart.items -%}
-        <div class="cart-item">
+        <div class="cart-item" data-item-key="{{ item.key }}">
           <div class="cart-item__image">
             {%- if item.image -%}
               <img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.title | escape }}" width="72" height="72" loading="lazy">
@@ -54,11 +54,11 @@
             {%- endunless -%}
             <p class="cart-item__price">{{ item.final_line_price | money }}</p>
             <div class="cart-item__quantity">
-              <button class="cart-item__qty-btn" data-qty-minus aria-label="Weniger">−</button>
-              <span class="cart-item__qty-value">{{ item.quantity }}</span>
-              <button class="cart-item__qty-btn" data-qty-plus aria-label="Mehr">+</button>
+              <button class="cart-item__qty-btn" data-cart-qty-minus data-key="{{ item.key }}" data-qty="{{ item.quantity }}" aria-label="Weniger">−</button>
+              <span class="cart-item__qty-value" data-qty-display="{{ item.key }}">{{ item.quantity }}</span>
+              <button class="cart-item__qty-btn" data-cart-qty-plus data-key="{{ item.key }}" data-qty="{{ item.quantity }}" aria-label="Mehr">+</button>
             </div>
-            <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity=0" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
+            <button class="cart-item__remove" data-cart-remove data-key="{{ item.key }}">{{ 'cart.remove' | t }}</button>
           </div>
         </div>
       {%- endfor -%}

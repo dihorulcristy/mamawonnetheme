@@ -76,6 +76,79 @@
   if (cartClose) cartClose.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
+  // ---- Cart AJAX helpers ----
+  function formatMoney(cents) {
+    return '€' + (cents / 100).toFixed(2).replace('.', ',');
+  }
+
+  async function cartChange(key, quantity) {
+    const response = await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: quantity })
+    });
+    return response.json();
+  }
+
+  async function refreshCartDrawer() {
+    const response = await fetch('/?section_id=cart-drawer');
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const newDrawer = doc.querySelector('.cart-drawer');
+    const oldDrawer = document.querySelector('.cart-drawer');
+    if (newDrawer && oldDrawer) {
+      // Preserve open state
+      const isOpen = oldDrawer.classList.contains('is-open');
+      oldDrawer.innerHTML = newDrawer.innerHTML;
+      if (isOpen) oldDrawer.classList.add('is-open');
+      bindCartEvents();
+    }
+    // Update cart count in header
+    const cart = await fetch('/cart.js').then(r => r.json());
+    document.querySelectorAll('.header__cart-count').forEach(el => {
+      el.textContent = cart.item_count;
+      el.style.display = cart.item_count > 0 ? '' : 'none';
+    });
+  }
+
+  function bindCartEvents() {
+    // Qty minus
+    document.querySelectorAll('[data-cart-qty-minus]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const key = btn.getAttribute('data-key');
+        const current = parseInt(btn.getAttribute('data-qty')) || 1;
+        const newQty = Math.max(0, current - 1);
+        btn.disabled = true;
+        await cartChange(key, newQty);
+        await refreshCartDrawer();
+      });
+    });
+
+    // Qty plus
+    document.querySelectorAll('[data-cart-qty-plus]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const key = btn.getAttribute('data-key');
+        const current = parseInt(btn.getAttribute('data-qty')) || 1;
+        btn.disabled = true;
+        await cartChange(key, current + 1);
+        await refreshCartDrawer();
+      });
+    });
+
+    // Remove
+    document.querySelectorAll('[data-cart-remove]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const key = btn.getAttribute('data-key');
+        btn.disabled = true;
+        await cartChange(key, 0);
+        await refreshCartDrawer();
+      });
+    });
+  }
+
+  bindCartEvents();
+
   // ---- FAQ Accordion ----
   document.querySelectorAll('.faq-item__question').forEach(btn => {
     btn.addEventListener('click', () => {
