@@ -263,6 +263,18 @@
                 newUrl.searchParams.set('variant', matchedVariant.id);
                 window.history.replaceState({}, '', newUrl);
 
+                // Update Image
+                if (matchedVariant.featured_image) {
+                  const positionIndex = matchedVariant.featured_image.position - 1;
+                  const gSlider = document.getElementById('ProductGallerySlider');
+                  if (gSlider) {
+                    const targetSlide = gSlider.querySelectorAll('.product-gallery__slide')[positionIndex];
+                    if (targetSlide) {
+                      gSlider.scrollTo({ left: targetSlide.offsetLeft, behavior: 'smooth' });
+                    }
+                  }
+                }
+
                 // Update Button
                 if (addToCartBtn) {
                   if (matchedVariant.available) {
